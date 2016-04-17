@@ -1,0 +1,9 @@
+= TITLE OF WORKSHOP HERE
+
+== Welcome
+
+Greetings and welcome to the workshop. By the time you leave today you will have gotten your hands nice and dirty playing with OpenShift, .....
+
+== FYI
+
+GROUND RULES FOR THE WORKSHOP

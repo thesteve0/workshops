@@ -1,0 +1,8 @@
+// expect another asciidoc before this that introduces the workshop
+// also another page on how to install the VM - this will cover manual installation when you have been given a box file
+
+
+= Introduction to the OpenShift All-In-One VM
+
+Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM
+

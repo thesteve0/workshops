@@ -1,0 +1,3 @@
+== Installing the Vagrant Box
+
+Let's go ahead and install the Vagrant box file and get everything up and running. 
