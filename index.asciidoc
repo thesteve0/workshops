@@ -1,7 +1,14 @@
-
-
 = Running PostGIS in Containers At Scale
+Steve Pousty
 
-include::common/intro_to_vm.asciidoc[]
+:toc:
+:toc-placement: macro
+
+toc::[]
+
 include::FOSS4GNA16/install_vm.asciidoc[]
+include::common/intro_to_vm.asciidoc[]
+toc::[]
 include::FOSS4GNA16/workshop_intro.asciidoc[]
+
+asciidoctor -S unsafe ~/git/workshops/index.asciidoc
