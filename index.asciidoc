@@ -1,0 +1,7 @@
+
+
+= Running PostGIS in Containers At Scale
+
+include::common/intro_to_vm.asciidoc[]
+include::FOSS4GNA16/install_vm.asciidoc[]
+include::FOSS4GNA16/workshop_intro.asciidoc[]
