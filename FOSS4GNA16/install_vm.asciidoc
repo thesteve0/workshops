@@ -1,3 +1,13 @@
 == Installing the Vagrant Box
 
 Let's go ahead and install the Vagrant box file and get everything up and running. 
+
+
+=== Hardware Requirements
+1. 10 gigs of disk to start but may need up to 40
+2. At least 8 gigs of RAM by default. Our VM will use 4 by default so we want to leave 4 gigs for the OS and others
+
+
+=== Software Requirements
+1. Install VirtualBox
+2. Install Vagrant

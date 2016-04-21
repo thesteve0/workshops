@@ -5,5 +5,26 @@
 
 == Introduction to the OpenShift All-In-One VM
 
-Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM
+Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM. If not please refer to [TODO LINK TO PAGE]. It is also assumed you downloaded the OpenShift command line tools and put them in your PATH - if not please refer to [TODO LINK TO PAGE]
 
+The all-in-one VM (A1VM) is intended for a developer or sysadmin to have a quick and easy way to use OpenShift (which also is a great way to use Kubernetes). The focus of the A1VM is:
+
+1. Works right out of the box
+2. Relaxes security restrictions so you can run Docker images that run as root
+3. Give developers a means to carry out rapid development without needing an external server
+4. Give the OpenShift evangelists an easy way to run workshops - like this one
+
+WARNING: We wanted to allow developers to use any Docker image they want, which required us turning off some security in OpenShift. By default, OpenShift will not allow a container to run as root or even a non-random container assigned userid. Most Docker images in Dockerhub do not follow this best practice and instead run as root. Further multiplying this error, a large majority of Dockerhub images are not patched for well known vulnerabilities. Therefore, please use images from Dockerhub with caution. We think some of the risk is mitigated because you are running OpenShift in a VM, but still - be careful which Docker images you run.
+
+And with that we begin the journey. Our first step will be to login to the VM both from the command line (cli) and the web console (console). Open a terminal and type in:
+
+[source, bash]
+----
+$ oc login https://10.2.2.2:844
+
+# on windows or if you get a cert. error do the following
+
+$ oc login https://10.2.2.2:844 --insecure-skip-tls-verify=false
+
+
+----

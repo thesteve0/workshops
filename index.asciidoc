@@ -1,5 +1,6 @@
 = Running PostGIS in Containers At Scale
 Steve Pousty
+:source-highlighter: highlight.js
 
 :toc:
 :toc-placement: macro
