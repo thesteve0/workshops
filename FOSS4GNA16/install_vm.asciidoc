@@ -24,14 +24,13 @@ WARNING: You must do this *BEFORE* the class - we will not have time to do this 
 
 === Github Repos to bring to your machine
 
-put these in a directory titled _os_workshop_ (not required but then it is on you to translate to your directory name in the rest of the instructions)
+These repos may not be finished or even available until right before the class, so we will be doing this in class.
+
+Put these in a directory titled _os_workshop_ (not required but then it is on you to translate to your directory name in the rest of the instructions)
 
 *FORK* The sample code https://github.com/thesteve0/v3simple-spatial and then clone to your machine. If you just clone without the fork you will not be able to do any of the code change exercises.
 
 Clone the Crunchy DB code https://github.com/CrunchyData/crunchy-containers (optionally you can fork and then clone if you think you are going to want to make your own changes).
-
-If you don't understand what I mean by _fork_ then you can wait for these steps until someone helps you in class. 
-
 
 === Getting the Vagrant box on your local machine
 
@@ -52,10 +51,10 @@ C:\_os_workshop\vagrant> vagrant up
 
 There is a 3.8 Gig file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up. 
 
-If you are doing this in the class we are going to manually bring the box to your machine.
-
 ---
 ==== Manually copying the box off of a USB drive
+
+If you are doing this in the class we are going to manually bring the box to your machine.
 
 WARNING: You need to have access to your USB drive to choose this method to bring up your Vagrant box
 
@@ -72,7 +71,6 @@ C:\_os_workshop\vagrant> vagrant box add --name origin workshop.box
 C:\_os_workshop\vagrant> vagrant up
 
 ----
-
 
 ---
 ==== Final step
@@ -100,3 +98,17 @@ When "vagrant up" is done you should see a message that ends with:
 ==> default: $ oc login https://10.2.2.2:8443
 ----
 
+If this doesn't happen raise your hand or, if you are a good student and did this at home, email me.  If you see this then you have installed everything properly. 
+
+I know some of you are going to be curious and are going to start playing with this VM. That's OK! 
+
+Right before class (or if you break it) you just need to do the following steps:
+
+[source, bash]
+----
+C:\_os_workshop\vagrant>vagrant destroy --force
+C:\_os_workshop\vagrant>rm -rf .vagrant #basically delete the .vagrant dir
+C:\_os_workshop\vagrant>vagrant up
+----
+
+You don't even need to be online for this command to work! Welcome to the future.
