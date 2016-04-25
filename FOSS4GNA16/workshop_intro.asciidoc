@@ -7,3 +7,4 @@ Greetings and welcome to the workshop. By the time you leave today you will have
 === FYI
 
 GROUND RULES FOR THE WORKSHOP
+

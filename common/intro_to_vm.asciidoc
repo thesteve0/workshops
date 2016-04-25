@@ -103,4 +103,6 @@ Now click on the _sample_ project and then click on the URL on the page that goe
 
 TIP: There could be several reasons why the URL doesn't resolve but the most common is that something is blocking the https://xip.io[xip.io] DNS resolution. I have seen several reasons for this: 
 1. The network is blocking alternate DNS resolution (very common on corporate networks)
-2. You have Google DNS set as your DNS provider on your machine or your router.
+2. You have a DNS set as your DNS provider on your machine or your router that blocks xip.io. Some people have had luck switching their DNS provider to Google - 8.8.8.8 & 8.8.8.4 DNS servers
+
+If both of theose steps then we are all set and we can actually move on to you getting some development done. 

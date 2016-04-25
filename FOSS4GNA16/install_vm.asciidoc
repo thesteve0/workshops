@@ -112,3 +112,4 @@ C:\_os_workshop\vagrant>vagrant up
 ----
 
 You don't even need to be online for this command to work! Welcome to the future.
+
