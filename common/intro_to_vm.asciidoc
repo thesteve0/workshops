@@ -16,15 +16,91 @@ The all-in-one VM (A1VM) is intended for a developer or sysadmin to have a quick
 
 WARNING: We wanted to allow developers to use any Docker image they want, which required us turning off some security in OpenShift. By default, OpenShift will not allow a container to run as root or even a non-random container assigned userid. Most Docker images in Dockerhub do not follow this best practice and instead run as root. Further multiplying this error, a large majority of Dockerhub images are not patched for well known vulnerabilities. Therefore, please use images from Dockerhub with caution. We think some of the risk is mitigated because you are running OpenShift in a VM, but still - be careful which Docker images you run.
 
+=== The command line
 And with that we begin the journey. Our first step will be to login to the VM both from the command line (cli) and the web console (console). Open a terminal and type in:
 
 [source, bash]
 ----
-$ oc login https://10.2.2.2:844
+> oc login https://10.2.2.2:844
 
 # on windows or if you get a cert. error do the following
 
-$ oc login https://10.2.2.2:844 --insecure-skip-tls-verify=false
+> oc login https://10.2.2.2:844 --insecure-skip-tls-verify=false
 
 
 ----
+
+You should be prompted for a username and passsword. For ease of use, in the workshop, we will use username _admin_ password _password_. You can actually use any password you want with the admin account. You can also use any username and password you want. The username will "matter" in that any project created in that username can only be seen by that username - but these are not secure accounts. Remember - the focus of this VM is ease of use.
+
+After logging in you should see the following message
+
+[source, bash]
+----
+
+Login successful.
+
+You have access to the following projects and can switch between them with 'oc project <projectname>':
+
+  * default (current)
+  * openshift
+  * openshift-infra
+  * sample
+
+Using project "default".
+
+----
+
+To check our installation let's look at the sample project with the sample application. Let's switch from the _default_ project to the _sample_ project.
+
+[source, bash]
+----
+
+> oc project sample
+Now using project "sample" on server "https://10.2.2.2:8443".
+
+----
+
+And now let's make sure all our resources are up and running. Run the following command and you should see something like this:
+
+[source, bash]
+----
+
+> oc status
+In project sample on server https://10.2.2.2:8443
+
+svc/database - 172.30.174.52:5434 -> 3306
+  dc/database deploys docker.io/openshift/mysql-55-centos7:latest
+    deployment #1 deployed 3 days ago - 1 pod
+
+http://frontend-sample.apps.10.2.2.2.xip.io to pod port web (svc/frontend)
+  dc/frontend deploys istag/origin-ruby-sample:latest <-
+    bc/ruby-sample-build builds https://github.com/openshift/ruby-hello-world.git with sample/ruby-22-centos7:latest
+    deployment #1 deployed 3 days ago - 2 pods
+
+2 warnings identified, use 'oc status -v' to see details.
+
+----
+
+We will revisit explaining all of these terms as we go and build our own application.
+
+=== Web Console
+
+Now in your browser go to https://10.2.2.2:8443 . You will get a warning about the certificate and this is to be expected since we are using self-signed certificates throughout the installation - so we will need to work around this. You will then get to the login screen. Again use the _admin_ and _admin_ username password combination and you should see something that looks like this (except for the red box):
+
+image::images/1_login.png[]
+
+Later in the workshops we will be looking at metrics for our resources and to get that to work we need to accept another self-signed SSL certificate. Please click on the _openshift-infra_ project and then on the next page click on the link for https://hawkular-metrics.apps.10.2.2.2.xip.io/
+
+image::images/1_hawkular.png[]
+
+Again, you will be confronted with a invalide cert warning and go ahead go through to the Hawkular page. Now you have the cert stored for that page so the metrics will be viewable. 
+
+Now go back to the Projects page by clicking on the house with the word _Projects_ next to it in the top right corner of the page. 
+
+image::images/1_projects.png[]
+
+Now click on the _sample_ project and then click on the URL on the page that goes to http://frontend-sample.apps.10.2.2.2.xip.io/ You should see a screen that LOOKS LIKE THIS (SCREENSHOT)
+
+TIP: There could be several reasons why the URL doesn't resolve but the most common is that something is blocking the https://xip.io[xip.io] DNS resolution. I have seen several reasons for this: 
+1. The network is blocking alternate DNS resolution (very common on corporate networks)
+2. You have Google DNS set as your DNS provider on your machine or your router.
