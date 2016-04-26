@@ -17,6 +17,8 @@ include::intro_to_os.asciidoc[]
 
 include::common/intro_to_vm.asciidoc[]
 
+include::adding_code.asciidoc[]
+
 toc::[]
 
 asciidoctor -S unsafe ~/git/workshops/index.asciidoc
