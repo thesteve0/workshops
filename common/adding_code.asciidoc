@@ -132,6 +132,27 @@ If our Vagrant image had an IP that was publically accessible, we could actually
 NAME               TYPE      FROM      LATEST
 v3simple-spatial   Source    Git       1
 
-> oc start-build v3simple-spatial -
+> oc start-build v3simple-spatial --follow --wait
 
--
+----
+
+2. You can also use the web console. Click on Browse in the left menu and then choose the builds. 
+
+image::images/2_builds.png[]
+
+There will only be one build listed on the page, go ahead and click it. Then on the next page in the upper right you will see a button "Start Build", go ahead and click it. 
+
+image::images/2_start_builds.png[]
+
+On the next page you can look at the what is happening by clicking on the "View Log" link.
+
+image::images/2_builds_log.png[]
+
+In the terminal on the resulting page you can watch the entire build and push progress: just like you could in the command line with the --follow flag. 
+
+With either the command line or the web console, when you go back to the Overview for your project you will notice that the number next to the deployments has incremented because we have actually done a build AND deployment as part of this process. 
+
+You are now certified in the Pousty School of Docker and Cloud management as having completed build and deploy MASTERS!
+
+In the next section we will now move on to add PostGIS to your application. 
+
