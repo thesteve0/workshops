@@ -37,7 +37,7 @@ https://github.com/thesteve0/v3simple-spatial
 
 Now *BEFORE* you go and _git clone_ it down to your machine, you need to fork it. See that button up towards the top right that says fork on it - [underline]#click it# (you did login with your github account right?)
 
-image::images/2_fork.png[]
+image::images/common/2_fork.png[]
 
 Now you should be looking at URL that replaces _thesteve0_ with your github userid:
 
@@ -45,7 +45,7 @@ https://github.com/<your_userid>/v3simple-spatial
 
 In the middle of the page you will see a button that says *SSH* on it. Please change that to SSH and then click the clipboard to copy the URL in the box.
 
-image::images/2_ssh_to_https.png[]
+image::images/common/2_ssh_to_https.png[]
 
 Our code is ready. Let's fire off the build and deploy. In your terminal enter the following command:
 
@@ -89,7 +89,7 @@ At this point we are going to switch back to the web terminal since it is easier
 
 Your screen should look something like this:
 
-image::images/2_create_route.png[]
+image::images/common/2_create_route.png[]
 
 You can see that we have the 1 pod running our image that was derived from our source code and our builder image. There is also other metadata in the box for the pod that we can return to later. For now I want you to click on the _Create Route_ button that is highlighted in red. This will create a URL where we can see the web page for our pod. By default, nothing is exposed to the outside world and you have to choose to expose it. 
 
@@ -114,7 +114,7 @@ While that web page is AWESOME, you might actually want to change it. OpenShift 
 
 Go ahead to your GitHub fork and edit the app.py file right there in GitHub. When looking at the GitHub repo., click on app.py and then on the next page click on the pencil icon in the top right. 
 
-image::images/2_edit_github.png[]
+image::images/common/2_edit_github.png[]
 
 
 Then on line 11 change the text to whatever you would like. I recommend something like "Steve is the best instructor EVER!" but your tastes may vary (be wrong).
@@ -123,7 +123,7 @@ After you are done with your change go ahead and scroll down the page. If you wa
 
 If our Vagrant image had an IP that was publically accessible, we could actually set up a web hook trigger in GitHub to tell OpenShift to build on commit to master. Instead we have to fire off the build manually. There are two ways to do this:
 
-1. At the command line you can do:
+1) At the command line you can do:
 [source, bash]
 ----
 
@@ -136,17 +136,17 @@ v3simple-spatial   Source    Git       1
 
 ----
 
-2. You can also use the web console. Click on Browse in the left menu and then choose the builds. 
+2) You can also use the web console. Click on Browse in the left menu and then choose the builds. 
 
-image::images/2_builds.png[]
+image::images/common/2_builds.png[]
 
 There will only be one build listed on the page, go ahead and click it. Then on the next page in the upper right you will see a button "Start Build", go ahead and click it. 
 
-image::images/2_start_builds.png[]
+image::images/common/2_start_builds.png[]
 
 On the next page you can look at the what is happening by clicking on the "View Log" link.
 
-image::images/2_builds_log.png[]
+image::images/common/2_builds_log.png[]
 
 In the terminal on the resulting page you can watch the entire build and push progress: just like you could in the command line with the --follow flag. 
 
@@ -156,3 +156,4 @@ You are now certified in the Pousty School of Docker and Cloud management as hav
 
 In the next section we will now move on to add PostGIS to your application. 
 
+<<<

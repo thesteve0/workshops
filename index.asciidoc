@@ -1,24 +1,19 @@
 = Running PostGIS in Containers At Scale
 Steve Pousty
-:source-highlighter: highlight.js
+:source-highlighter: coderay
 
-:toc:
-:toc-placement: macro
-
-toc::[]
-=== Slides Used in Class
+== Slides Used in Class
 Here are http://bit.ly/v3intro[the slides] I will be using to present from. Both these slides and this workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
 
 include::FOSS4GNA16/workshop_intro.asciidoc[]
 
 include::FOSS4GNA16/install_vm.asciidoc[]
 
-include::intro_to_os.asciidoc[]
+include::common/intro_to_os.asciidoc[]
 
 include::common/intro_to_vm.asciidoc[]
 
-include::adding_code.asciidoc[]
+include::common/adding_code.asciidoc[]
 
-toc::[]
 
 asciidoctor -S unsafe ~/git/workshops/index.asciidoc

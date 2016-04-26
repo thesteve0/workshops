@@ -87,24 +87,26 @@ We will revisit explaining all of these terms as we go and build our own applica
 
 Now in your browser go to https://10.2.2.2:8443 . You will get a warning about the certificate and this is to be expected since we are using self-signed certificates throughout the installation - so we will need to work around this. You will then get to the login screen. Again use the _admin_ and _admin_ username password combination and you should see something that looks like this (except for the red box):
 
-image::images/1_login.png[]
+image::images/common/1_login.png[]
 
 Later in the workshops we will be looking at metrics for our resources and to get that to work we need to accept another self-signed SSL certificate. Please click on the _openshift-infra_ project and make sure all the circles are blue. If they are not all blue, they should turn blue in about a minute. If they do not turn blue please raise your hand and call someone over. Now click on the link for https://hawkular-metrics.apps.10.2.2.2.xip.io/ (you can even do it in this document and it should resolve properly)
 
-image::images/1_hawkular.png[]
+image::images/common/1_hawkular.png[]
 
 Again, you will be confronted with a invalide cert warning and go ahead go through to the Hawkular page. Now you have the cert stored for that page so the metrics will be viewable. 
 
 Now go back to the Projects page by clicking on the house with the word _Projects_ next to it in the top right corner of the page. 
 
-image::images/1_projects.png[]
+image::images/common/1_projects.png[]
 
 Now click on the _sample_ project and then click on the URL on the page that goes to http://frontend-sample.apps.10.2.2.2.xip.io/ You should see a screen that looks like this:
 
-image::images/1_sample_app.png[]
+image::images/common/1_sample_app.png[]
 
 TIP: There could be several reasons why the URL doesn't resolve but the most common is that something is blocking the https://xip.io[xip.io] DNS resolution. I have seen several reasons for this: 
 1. The network is blocking alternate DNS resolution (very common on corporate networks)
 2. You have a DNS set as your DNS provider on your machine or your router that blocks xip.io. Some people have had luck switching their DNS provider to Google - 8.8.8.8 & 8.8.8.4 DNS servers
 
 If both of theose steps then we are all set and we can actually move on to you getting some development done. 
+
+<<<

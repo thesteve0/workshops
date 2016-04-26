@@ -13,16 +13,12 @@ I am going to put two diagrams here that we will be discussing in class. You can
 
 Here is the top level, showing the pieces in the interfaces and authentication:
 
-image::images/common/OpenShiftAccessAndControlColour.png[]
+image::images/OpenShiftAccessAndControlColour.png[]
 
 And here are the lower level pieces that make up the core objects.
 
-image::images/common/OpenShiftBuildsAndDeploymentsColour.png[]
+image::images/OpenShiftBuildsAndDeploymentsColour.png[]
 
 Finally, here is a diagram showing how an OpenShift/Kubernetes cluster is put together from different data center "pieces"
 
-image::images/common/IntroductionToOpenShift3Cluster.png[]
-
-Now that we have done enough talking - the rest of the class will be action!
-
-<<<
+image::images/IntroductionToOpenShift3Cluster.png[]
