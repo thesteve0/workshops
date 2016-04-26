@@ -81,6 +81,57 @@ Our code is ready. Let's fire off the build and deploy. In your terminal enter t
 
 What we just did is told OpenShift - take this https://github.com/openshift/s2i-python[Docker Image] that knows how to build a standard Python application layout and combine it with this source code and produce a new Docker Image. As part of this process the _new-app_ command knows we will need some other OpenShift objects to actually run that resulting image. The command goes ahead and makes those objects as well. 
 
-TIP: TAKE A BREAK RIGHT HERE BECAUSE I AM GOING TALK YOU THROUGH ALL THOSE OBJECTS IT JUST BUILT. YOU WILL NEED THE DIAGRAMS FROM THE INTRODUCTION TO OPENSHIFT TO REFER TO.
+TIP: TAKE A BREAK RIGHT HERE BECAUSE I AM GOING TALK YOU THROUGH ALL THOSE OBJECTS IT JUST BUILT. YOU WILL NEED THE DIAGRAMS FROM THE "INTRODUCTION TO OPENSHIFT" TO REFER TO.
 
 ==== Looking at what we built. 
+
+At this point we are going to switch back to the web terminal since it is easier to look at web sites in a browser. Go ahead and go into your browser and go to the projects page. Once you are looking at all your projects go ahead and click on _spatialapp_.
+
+Your screen should look something like this:
+
+image::images/2_create_route.png[]
+
+You can see that we have the 1 pod running our image that was derived from our source code and our builder image. There is also other metadata in the box for the pod that we can return to later. For now I want you to click on the _Create Route_ button that is highlighted in red. This will create a URL where we can see the web page for our pod. By default, nothing is exposed to the outside world and you have to choose to expose it. 
+
+Just click _Create_ on the next page that comes up - all the defaults are fine for our us. You could have also done this at the command line with 
+
+[source, bash]
+----
+
+> oc expose service v3simple-spatial
+
+----
+
+Now when you come back to the Overview page there is a URL for the service ending in .xip.io, go ahead and click it! You will be greated by the following amazing web content:
+
+*hello OpenShift Ninja without DB*
+
+You have now all built and deployed containers with a working URL - give yourselves a pat on the back.
+
+=== Doing Code Changes With a Build
+
+While that web page is AWESOME, you might actually want to change it. OpenShift gives you the ability to change the code in a "hot swap" fasion for rapid iteration development or in a more complete build cycle which creates a new image. For now we will do the more complete build cycle and the "hot swap" later. 
+
+Go ahead to your GitHub fork and edit the app.py file right there in GitHub. When looking at the GitHub repo., click on app.py and then on the next page click on the pencil icon in the top right. 
+
+image::images/2_edit_github.png[]
+
+
+Then on line 11 change the text to whatever you would like. I recommend something like "Steve is the best instructor EVER!" but your tastes may vary (be wrong).
+
+After you are done with your change go ahead and scroll down the page. If you want to add comments or something to your commit go ahead, but everyone needs to press the big GREEN button. You have now committed your change to your GitHub repository.
+
+If our Vagrant image had an IP that was publically accessible, we could actually set up a web hook trigger in GitHub to tell OpenShift to build on commit to master. Instead we have to fire off the build manually. There are two ways to do this:
+
+1. At the command line you can do:
+[source, bash]
+----
+
+#get a listing of the build configs (bc)
+> oc get bc
+NAME               TYPE      FROM      LATEST
+v3simple-spatial   Source    Git       1
+
+> oc start-build v3simple-spatial -
+
+-
