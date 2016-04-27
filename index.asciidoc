@@ -15,5 +15,9 @@ include::common/intro_to_vm.asciidoc[]
 
 include::common/adding_code.asciidoc[]
 
+include::common/adding_database.asciidoc[]
+
+include::common/full_application.asciidoc[]
+
 
 asciidoctor -S unsafe ~/git/workshops/index.asciidoc
