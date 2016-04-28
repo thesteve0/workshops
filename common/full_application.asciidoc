@@ -1,3 +1,30 @@
 == Simple Web Application
 
-To exercise the database some more we are going to put a 
+To exercise the database some more we are going to change our python web application to read and write from the PostGIS master and slave services. When using OpenShift the way to handle the connection paramters to the DB are handled through environment variables. Rather than hard coding in IP addresses or username/passwords we set environment variables that actually point to those values.
+
+Some of these are set by the platform "automagically" - these are usually network type variables like hosts to IP and port mappings. The others, that we need to handle manually right now are database name, username, and password. At the end of this section I will explain how we could have avoided having to manually do this.
+
+So as I explained above we got the network pieces for free. Let's add the env variables to the deployment configuration (dc) for the python code. We add it to the dc so it becomes available to all pods controlled by the dc. We will start with the read operations from the DB so we will use the slave pods for those operations. 
+
+In your browser go to the Browse -> Deployments
+
+image::images/4_deployments.png[]
+
+From there click on the deployment for the _pg-slave-rc_ then click on the environment tab. From there you should see all the environment variables defined on the dc. We are interested in 3 of the variables: PG_USER, PG_PASSWORD, and PG_DATABASE. You will need the names and values for both of these (please note that your values will be different). They are highlighted in red below:
+
+image::images/4_dc_env_variables.png[]
+
+Now that we have these we just have to do a simple command:
+
+[source, bash]
+----
+
+> oc set env dc/v3simple-spatial PG_DATABASE=userdb PG_USER=testuser PG_P
+ASSWORD=wDxwXGgenIDQ
+deploymentconfig "v3simple-spatial" updated 
+
+----
+
+This will force a redeployment of the pods to get the new environment variables. We have to do this redeployment because remember, containers are immutable. 
+
+With that step done we can now modify our python code. I have the completed example as 2_app.py in the github repo. 

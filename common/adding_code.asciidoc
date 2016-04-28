@@ -52,7 +52,7 @@ Our code is ready. Let's fire off the build and deploy. In your terminal enter t
 [source, bash]
 ----
 
-> oc new-app python:2.7~https://github.com/thesteve0/v3simple-spatial.git
+> oc new-app python:3.3~https://github.com/thesteve0/v3simple-spatial.git
 --> Found image 596ac47 (11 days old) in image stream "python" in project "openshift" under tag "2.7" for "python:2.7"
 
     Python 2.7 

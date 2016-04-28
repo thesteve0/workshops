@@ -21,3 +21,5 @@ include::common/full_application.asciidoc[]
 
 
 asciidoctor -S unsafe ~/git/workshops/index.asciidoc
+
+oc delete is,dc,svc,bc v3simple-spatial
