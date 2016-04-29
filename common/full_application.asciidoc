@@ -19,12 +19,40 @@ Now that we have these we just have to do a simple command:
 [source, bash]
 ----
 
-> oc set env dc/v3simple-spatial PG_DATABASE=userdb PG_USER=testuser PG_P
-ASSWORD=wDxwXGgenIDQ
+> oc set env dc/v3simple-spatial PG_DATABASE=userdb PG_USER=postgres  PG_ROOT_PASSWORD=WM4vPCCAGyt2
 deploymentconfig "v3simple-spatial" updated 
 
 ----
 
 This will force a redeployment of the pods to get the new environment variables. We have to do this redeployment because remember, containers are immutable. 
 
-With that step done we can now modify our python code. I have the completed example as 2_app.py in the github repo. 
+With that step done we can now modify our python code. I have the completed example as 2_app.py in the github repo. The steps we did to make this code change was
+
+* Added the library to requirements.txt
+----
+psycopg2==2.6.1
+
+----
+
+* Added lines to the app.py to make the connection to the slave *service* with the proper credentials. Then on a GET request we return back some simple information from the database. 
+
+WARNING: This code is in NO WAY production type code. This code is trying to be as simple as possible so you learn the basic patterns. In a real app you would not load a DB connection on every request, you would check for exceptions, and you would have more optimized queries.
+
+To make the code change there are two ways to proceed:
+
+1. Either type or copy the code changes you see in 2_app.py into app.py
+2. Go ahead and rename app.py to 1_app.py and then rename 2_app.py to app.py
+
+After either of those steps go ahead and do the following commands in the v3simple-spatial directory:
+
+[source, bash]
+----
+
+> git commit -am "new code"
+> git push origin master
+
+----
+
+Then back in your web console you can fire off another build like you did in the last exercise. After the build and deploy is finished when you go to http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db  the first 10 entries in the table. 
+
+If we have time at the end perhaps we will write now to the database. For now let's move on to some of the advanced features we can get with containers. 

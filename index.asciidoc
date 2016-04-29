@@ -19,6 +19,8 @@ include::common/adding_database.asciidoc[]
 
 include::common/full_application.asciidoc[]
 
+include::FOSS4GNA16/postgresql_metrics.asciidoc[]
+
 
 asciidoctor -S unsafe ~/git/workshops/index.asciidoc
 
