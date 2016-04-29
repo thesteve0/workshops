@@ -52,7 +52,7 @@ You may receive a warning that rsync is not found on your machine but the comman
 
 Let's shell into that same pod and load the data
 
-[shell, bash]
+[source, bash]
 ----
 
 > oc rsh pg-master-rc-1-abvxb
@@ -91,7 +91,7 @@ userdb=# \q
 
 You have now loaded your database with a bunch of points for national parks in the US and Canada. The really amazing part comes next. Go ahead and go to the overview for the project. Go ahead and click on the circle for the _pg-slave-rc_ which will bring you to a listing with a single pod. Go ahead and click on that link. On the page for the pod, click on the terminal tab:
 
-image::images/3_terminal.png[]
+image::images/common/3_terminal.png[]
 
 On the resulting page you need to click twice on the terminal area to give it focus BUT you are now in terminal in the running pod - slick.
 
@@ -117,7 +117,7 @@ Do you REALIZE what just happened. We entered data into the Master DB and it was
 
 Let's take this to even another level. In the web console, go back to the overview again and then click on the little up arrow next to the slave pods:
 
-image::images/3_scale.png[]
+image::images/common/3_scale.png[]
 
 The number inside the circle will increment to 2 and then the blue circle will fill in the rest of the circle. You now have 2 replicas running. If you click on the circle again you will see the list of the two pods. If you click on the new pod and then do the commands above you will see that it has already been replicated to the new replica.
 

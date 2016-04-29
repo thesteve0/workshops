@@ -8,11 +8,11 @@ So as I explained above we got the network pieces for free. Let's add the env va
 
 In your browser go to the Browse -> Deployments
 
-image::images/4_deployments.png[]
+image::images/common/4_deployments.png[]
 
 From there click on the deployment for the _pg-slave-rc_ then click on the environment tab. From there you should see all the environment variables defined on the dc. We are interested in 3 of the variables: PG_USER, PG_PASSWORD, and PG_DATABASE. You will need the names and values for both of these (please note that your values will be different). They are highlighted in red below:
 
-image::images/4_dc_env_variables.png[]
+image::images/common/4_dc_env_variables.png[]
 
 Now that we have these we just have to do a simple command:
 
@@ -56,3 +56,5 @@ After either of those steps go ahead and do the following commands in the v3simp
 Then back in your web console you can fire off another build like you did in the last exercise. After the build and deploy is finished when you go to http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db  the first 10 entries in the table. 
 
 If we have time at the end perhaps we will write now to the database. For now let's move on to some of the advanced features we can get with containers. 
+
+<<<
