@@ -1,0 +1,20 @@
+== Advanced Usage - DB Metrics
+
+In this section we are going to use some Docker containers built by CrunchyDB to get metrics on our databases. They have built containers to run Promethues and Grafana and then given us the templates to hook these up to our Postgresql Servers. 
+
+We already added the pieces to our Postgresql pods when we use the template during the earlier exercises. Now we need to setup the pieces to collect and display those metrics.
+
+=== Adding the collection and display pieces
+
+Go back into the crunchy-containers repo on your local machine and go into _examples/openshift/scope_ then execture this command:
+
+[source, bash]
+----
+
+> oc new-app scope.json
+
+----
+
+Now we need to expose the web port for these containers with a url. The Grafana pod is serviing up content over port 3000 and that is the one we want to expose. 
+
+Back in the web console you will now see the crunchy-scope service. Go ahead and click on the "create route" link on the right side of the service. This time before you click create make sure to change the port on the last dialog to  3000 -

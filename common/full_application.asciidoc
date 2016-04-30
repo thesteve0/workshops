@@ -29,6 +29,7 @@ This will force a redeployment of the pods to get the new environment variables.
 With that step done we can now modify our python code. I have the completed example as 2_app.py in the github repo. The steps we did to make this code change was
 
 * Added the library to requirements.txt
+[source, bash]
 ----
 psycopg2==2.6.1
 
@@ -54,6 +55,13 @@ After either of those steps go ahead and do the following commands in the v3simp
 ----
 
 Then back in your web console you can fire off another build like you did in the last exercise. After the build and deploy is finished when you go to http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db  the first 10 entries in the table. 
+
+=== Writing to Master
+
+The great part of what we have set up is we can isolate our writes to master and our reads from the replica - which is why people usually do this in the first place. 
+
+We have already set all the environment variables we need so really it is just editing the code. In a more production ready app you would probably use two different Postgresql accounts, one for reading and one for writing, which would require new environment variables. 
+
 
 If we have time at the end perhaps we will write now to the database. For now let's move on to some of the advanced features we can get with containers. 
 

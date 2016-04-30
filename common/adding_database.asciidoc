@@ -22,10 +22,11 @@ This will give you the JSON for the services, deploymentConfigs, and buildConfig
 
 In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _examples/openshift_ directory. We are going to use the file _master-slave-rc-pg-env-vars.json_ and you can open it in your favorite text editor now. I am not expecting you to understand it but I want to show you the parameters. Now that we are done talking about it let's do it:
 
+
 [source, bash]
 ----
 
- > oc new-app .\master-slave-rc-pg-env-vars.json
+ > oc new-app .\master-slave-rc-pg-env-vars-with-collect.json
 
 ----
 
@@ -43,7 +44,10 @@ NAME                   READY     STATUS    RESTARTS   AGE
 pg-master-rc-1-abvxb   1/1       Running   0          2d
 pg-slave-rc-1-obd02    1/1       Running   0          2d
 
- oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/.
+#Look for the conainer named server - we will need this below
+> oc describe pods pg-master-rc-1-abvxb 
+
+ oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/. -c server
  ddl/parkcoord.sql
 
 ----
@@ -55,7 +59,7 @@ Let's shell into that same pod and load the data
 [source, bash]
 ----
 
-> oc rsh pg-master-rc-1-abvxb
+> oc rsh -c server pg-master-rc-1-abvxb
 sh-4.2$ psql -l
                              List of databases
    Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges
