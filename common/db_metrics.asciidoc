@@ -17,4 +17,32 @@ Go back into the crunchy-containers repo on your local machine and go into _exam
 
 Now we need to expose the web port for these containers with a url. The Grafana pod is serviing up content over port 3000 and that is the one we want to expose. 
 
-Back in the web console you will now see the crunchy-scope service. Go ahead and click on the "create route" link on the right side of the service. This time before you click create make sure to change the port on the last dialog to  3000 -
+Back in the web console you will now see the crunchy-scope service. Go ahead and click on the "create route" link on the right side of the service. This time before you click create make sure to change the port on the last dialog to  3000 --> 3000.
+
+image::images/common/5_custom_route.png[]
+
+If you click on that link you should now see the home page for Grafana with a login prompt. Use admin for the username and the password. 
+
+Then there will be a with a lot of boxes and dialogs but before we do anything we have to add a Data Source. So go ahead and click on "Data Sources" and then "add new".
+
+image::images/5_new_datasource.png[]
+
+Then you get a much simpler box - go ahead and fill it out with the values you see in the boxes.  In case you can't read the picture, the fields are:
+
+* Name: crunchy
+* Type: prometheus
+* Url:  http://crunchy-scope:9090
+
+image::images/5_datasource_details.png[]
+
+When that is all filled in go ahead and click the green "add" button in the bottom right corner. Then click the green "save" button. 
+
+Now that we have a data source we can start making graphs.  Click on Dashboards in the top right, then click on home on the top and then "new" button on the bottom. 
+
+image::images/5_new_graph.png[]
+
+Now, very unintuitively you need to click on that little green bar on the top left that appears on the next screen. Follow the flow all the way down until you get to add a grah. 
+
+
+On the next (not so) intuitive page you need to first go to the bottom right and change the datasource to crunchy. Then you click in the Metric box and will pop-up a list of the fields you can query on. Not being a postgresql admin, I am not exactly sure which is the best to pick to show activity. 
+v
