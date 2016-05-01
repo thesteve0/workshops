@@ -58,11 +58,36 @@ Then back in your web console you can fire off another build like you did in the
 
 === Writing to Master
 
-The great part of what we have set up is we can isolate our writes to master and our reads from the replica - which is why people usually do this in the first place. 
+The great part of what we have set up is we can isolate our writes to master and our reads from the replica - which is why people usually set up replicas in the first place. 
 
-We have already set all the environment variables we need so really it is just editing the code. In a more production ready app you would probably use two different Postgresql accounts, one for reading and one for writing, which would require new environment variables. 
+We have already set all the environment variables we need so really it is just editing the code. The only change we need to make to the new code is to have the connection be to the master rather than the replica. Other than that the connection parameters stay the same. In a more production ready app you would probably use two different Postgresql accounts, one for reading and one for writing, which would require new environment variables. 
+
+I added code to randomly generate a name and the coords for a new point whenever you HTTP POST to the /db URL. Again this is really hacky code for a workshop - not production code. I will talk you through the code in class. 
+
+Remember, to make the code change there are two ways to proceed:
+
+1. Either type or copy the code changes you see in 3_app.py into app.py
+2. Go ahead and rename app.py to 2_app.py and then rename 3_app.py to app.py
+
+Don't forget to do the git commands I gave you above and then fire off another build. 
+
+Finally, to hit this URL you can either install a plugin for your browser or you can use cURL. By default browsers do an HTTP GET but we need a POST. There are plenty of plugins for Chrome and Firefox to help you do a HTTP Post - most of them have the word REST in them. Here is cURL syntax that will exercise the end point:
+
+[source, bash]
+----
+
+# -d says to do a POST and we leave the payload blank
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d '' 
+
+# if you want to look at the output in a nicer format you can save it to HTML
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''  > index.html
 
 
-If we have time at the end perhaps we will write now to the database. For now let's move on to some of the advanced features we can get with containers. 
+----
+
+If you use a browser plugin the URL stays the same and you just tell the plugin to use a POST.
+
+The response will be the last 10 entries in the DB - which will include your latest entry. You can go ahead and POST several items and watch the new entries show up. 
+
 
 <<<
