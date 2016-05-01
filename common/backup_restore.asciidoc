@@ -1,0 +1,14 @@
+== Backup and Restore Your Database 
+
+We don't have time to cover this in class today but I want to give you instructions so you can do this at home if you want.  Ths touches on an area that we didn't have time to dig in on - permanent storage. We used it in our postgresql data but we are not using it with the metrics. 
+
+To backup we are going to write and read from disc. So you are going to have to trust me and just follow along unless you finish early. 
+
+=== Backup
+
+
+=== Restore
+
+
+<<<
+

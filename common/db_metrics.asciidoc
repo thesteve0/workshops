@@ -44,5 +44,8 @@ image::images/5_new_graph.png[]
 Now, very unintuitively you need to click on that little green bar on the top left that appears on the next screen. Follow the flow all the way down until you get to add a grah. 
 
 
-On the next (not so) intuitive page you need to first go to the bottom right and change the datasource to crunchy. Then you click in the Metric box and will pop-up a list of the fields you can query on. Not being a postgresql admin, I am not exactly sure which is the best to pick to show activity. 
-v
+On the next (not so) intuitive page you need to first go to the bottom right and change the datasource to crunchy. Then you click in the Metric box and will pop-up a list of the fields you can query on. Not being a postgresql admin, I am not exactly sure which is the best to pick to show activity.  We will also need to exercise the DB so go ahead and do some queries, hit the web page, anything to exercise the DB. As we go on we should see the metrics move. 
+
+And with that we have finished adding metrics to our database.
+
+<<<
