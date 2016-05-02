@@ -25,7 +25,7 @@ If you click on that link you should now see the home page for Grafana with a lo
 
 Then there will be a with a lot of boxes and dialogs but before we do anything we have to add a Data Source. So go ahead and click on "Data Sources" and then "add new".
 
-image::images/5_new_datasource.png[]
+image::images/common/5_new_datasource.png[]
 
 Then you get a much simpler box - go ahead and fill it out with the values you see in the boxes.  In case you can't read the picture, the fields are:
 
@@ -33,13 +33,13 @@ Then you get a much simpler box - go ahead and fill it out with the values you s
 * Type: prometheus
 * Url:  http://crunchy-scope:9090
 
-image::images/5_datasource_details.png[]
+image::images/common/5_datasource_details.png[]
 
 When that is all filled in go ahead and click the green "add" button in the bottom right corner. Then click the green "save" button. 
 
 Now that we have a data source we can start making graphs.  Click on Dashboards in the top right, then click on home on the top and then "new" button on the bottom. 
 
-image::images/5_new_graph.png[]
+image::images/common/5_new_graph.png[]
 
 Now, very unintuitively you need to click on that little green bar on the top left that appears on the next screen. Follow the flow all the way down until you get to add a grah. 
 

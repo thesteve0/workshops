@@ -2,10 +2,21 @@
 
 === Welcome
 
-Greetings and welcome to the workshop. By the time you leave today you will have gotten your hands nice and dirty playing with OpenShift, .....
+Greetings and welcome to the workshop. By the time you leave today you will have gotten your hands nice and dirty playing with OpenShift. My overall goal for today is to:
+
+1. Introduce you to running applications in containers
+2. Seeing some cool things you can now have with PostGIS
 
 === FYI
 
-GROUND RULES FOR THE WORKSHOP
+* We have 4 hours of class ahead of us 
+* Use the bathroom when you want
+* We are here to help you so please ask questions and interrupt us
+* You can keep using this VM when you get home to play with
+    1. Docker
+    2. Kubernetes
+    3. OpenShift
+
+
 
 <<<

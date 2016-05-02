@@ -107,7 +107,7 @@ Right before class (or if you break it) you just need to do the following steps:
 [source, bash]
 ----
 C:\_os_workshop\vagrant>vagrant destroy --force
-C:\_os_workshop\vagrant>rm -rf .vagrant #basically delete the .vagrant dir
+C:\_os_workshop\vagrant>rm -rf .vagrant #basically delete the .vagrant dir - I do it bc I am superstitious
 C:\_os_workshop\vagrant>vagrant up
 ----
 

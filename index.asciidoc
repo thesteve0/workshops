@@ -3,7 +3,7 @@ Steve Pousty
 :source-highlighter: coderay
 
 == Slides Used in Class
-Here are http://bit.ly/v3intro[the slides] I will be using to present from. Both these slides and this workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
+Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
 
 include::FOSS4GNA16/workshop_intro.asciidoc[]
 
@@ -21,7 +21,38 @@ include::common/full_application.asciidoc[]
 
 include::common/db_metrics.asciidoc[]
 
+==== Here are some basic commands I found useful
+
+How to build the documentation
+
+[source, bash]
+----
 
 asciidoctor -S unsafe ~/git/workshops/index.asciidoc
 
+----
+
+How to delete the application pieces but not the DB pieces
+[source, bash]
+----
+
 oc delete is,dc,svc,bc v3simple-spatial
+
+----
+
+How to do a web request with cURL
+
+[source, bash]
+----
+
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d '' 
+
+----
+
+How to insert a value into the table
+[source, sql]
+----
+
+Insert into parkpoints (name, the_geom) VALUES ('ASteve', ST_GeomFromText('POINT(-85.7302 37.5332)', 4326));
+
+----

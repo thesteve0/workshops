@@ -43,7 +43,7 @@ Now you should be looking at URL that replaces _thesteve0_ with your github user
 
 https://github.com/<your_userid>/v3simple-spatial
 
-In the middle of the page you will see a button that says *SSH* on it. Please change that to SSH and then click the clipboard to copy the URL in the box.
+In the middle of the page you will see a button that may say *SSH* on it. If it does, please change that to HTTPS and then click the clipboard to copy the URL in the box.
 
 image::images/common/2_ssh_to_https.png[]
 
