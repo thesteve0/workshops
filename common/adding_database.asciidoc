@@ -47,8 +47,7 @@ pg-slave-rc-1-obd02    1/1       Running   0          2d
 #Look for the conainer named server - we will need this below
 > oc describe pods pg-master-rc-1-abvxb 
 
- oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/. -c server
- ddl/parkcoord.sql
+ oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/. 
 
 ----
 
