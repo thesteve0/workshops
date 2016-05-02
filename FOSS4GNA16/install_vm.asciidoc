@@ -67,7 +67,7 @@ Then in that directory do the following commands:
 [source, bash]
 ----
 
-C:\_os_workshop\vagrant> vagrant box add --name origin workshop.box
+C:\_os_workshop\vagrant> vagrant box add --name origin openshift3-origin-foss4gna-2016.box
 C:\_os_workshop\vagrant> vagrant up
 
 ----
