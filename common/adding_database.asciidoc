@@ -48,7 +48,6 @@ pg-slave-rc-1-obd02    1/1       Running   0          2d
 > oc describe pods pg-master-rc-1-abvxb 
 
  oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/. -c server
- ddl/parkcoord.sql
 
 ----
 

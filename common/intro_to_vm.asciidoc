@@ -21,11 +21,11 @@ And with that we begin the journey. Our first step will be to login to the VM bo
 
 [source, bash]
 ----
-> oc login https://10.2.2.2:844
+> oc login https://10.2.2.2:8443
 
 # on windows or if you get a cert. error do the following
 
-> oc login https://10.2.2.2:844 --insecure-skip-tls-verify=false
+> oc login https://10.2.2.2:8443 --insecure-skip-tls-verify=true
 
 
 ----
