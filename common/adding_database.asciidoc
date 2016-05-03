@@ -32,7 +32,7 @@ In the terminal, please go to the location on your machine where you cloned the 
 
 That's it - thanks to the work by Jeff you now have a master-replica PostGIS database setup. You can see it in the web overview for the project now. I will talk through the pieces in class.
 
-=== Loadind the Database
+=== Loading the Database
 
 Let's go ahead and load up the database in the master with some DDL. In the v3simple-spatial repository https://github.com/thesteve0/v3simple-spatial.git there is already a SQL file with all our DDL statements. Please clone the repository and then change into the root of the repository. 
 
