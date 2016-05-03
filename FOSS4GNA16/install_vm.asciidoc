@@ -60,7 +60,7 @@ WARNING: You need to have access to your USB drive to choose this method to brin
 
 Please try to come 15 minutes early to class so we can try to do the copying and installing before the class starts.
 
-Copy the _Vagrantfile_ and  _workshop.box_ file from the USB stick into the _vagrant_ directory created above.
+Copy the _Vagrantfile_ and  _openshift3-origin-foss4gna-2016.box_ file from the USB stick into the _vagrant_ directory created above.
 
 Then in that directory do the following commands:
 
