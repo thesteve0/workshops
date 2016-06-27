@@ -5,6 +5,15 @@ Steve Pousty
 == Slides Used in Class
 Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
 
+TODO 
+running an image (ngnix or apache)
+making that image into an s2i image
+adding health checks
+[Then all the stuff in the middle]
+Then making a template
+Then if time maybe a blue green deployment
+
+
 include::FOSS4GNA16/workshop_intro.asciidoc[]
 
 include::FOSS4GNA16/install_vm.asciidoc[]
@@ -13,13 +22,14 @@ include::common/intro_to_os.asciidoc[]
 
 include::common/intro_to_vm.asciidoc[]
 
+include::common/running_an_image.asciidoc[]
+
 include::common/adding_code.asciidoc[]
 
 include::common/adding_database.asciidoc[]
 
 include::common/full_application.asciidoc[]
 
-include::common/db_metrics.asciidoc[]
 
 ==== Here are some basic commands I found useful
 
