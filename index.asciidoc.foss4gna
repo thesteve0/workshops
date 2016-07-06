@@ -5,14 +5,6 @@ Steve Pousty
 == Slides Used in Class
 Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
 
-TODO 
-running an image (ngnix or apache)
-making that image into an s2i image
-adding health checks
-[Then all the stuff in the middle]
-Then making a template
-Then if time maybe a blue green deployment
-
 
 include::FOSS4GNA16/workshop_intro.asciidoc[]
 
