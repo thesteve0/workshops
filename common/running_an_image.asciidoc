@@ -1,0 +1,52 @@
+== Running a Docker Container Image
+
+Let's start by just running a plain ole' Apache HTTPD server in OpenShift. By way of doing this I will also introduce you to many of the major pieces in an OpenShift project.
+
+We are going to move back and forth between the command line and the web UI so please have them both ready to go and logged in as the user. 
+
+=== Create a Project
+
+In order to get going we need to create a _project_ to hold all of the pieces of our application(s). A _project_ is a materialized _namespace_ in Kubernetes to provide permissions and access control between different users resources. 
+
+The first thing we need to do as a user is create the _project_
+
+[source, bash]
+----
+> oc new-project webpages
+Now using project "webpages" on server "https://10.2.2.2:8443".
+...
+----
+
+We created a _project_ named webpages and all subsequent commands will be executed against this _project_. 
+
+There is a special _project_ that admins have access to in the cluster named "openshift". Any templates (explained later) or other objects placed in this project are available to all users of the cluster with read permissions. 
+
+To see all the projects that you have permissions to see go ahead and:
+
+[source, bash]
+----
+
+> oc get projects
+
+----
+
+=== Bringing in Docker Container Image from DockerHub
+
+Typically you will not bring in images directly from DockerHub because of the numerous flaws and vulnerabilities in DockerHub images. One big probem for many images on DockerHub is that they run as _root_ user when it is not even required. By default, an OpenShift cluster will not let you run images as _root_. In the case of the A1VM we turn off this security to allow for ease of use. 
+
+Today we will use an image 
+
+oc new-app centos/nginx-16-centos7
+
+https://hub.docker.com/r/centos/nginx-16-centos7/
+
+Web content here:
+
+/opt/rh/nginx16/root/usr/share/nginx/html
+Go in through terminal or oc rsh 
+
+echo  "hello world" > index.html
+
+Then reload page
+
+

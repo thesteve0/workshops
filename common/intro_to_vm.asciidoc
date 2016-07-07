@@ -50,38 +50,7 @@ Using project "default".
 
 ----
 
-To check our installation let's look at the sample project with the sample application. Let's switch from the _default_ project to the _sample_ project.
 
-[source, bash]
-----
-
-> oc project sample
-Now using project "sample" on server "https://10.2.2.2:8443".
-
-----
-
-And now let's make sure all our resources are up and running. Run the following command and you should see something like this:
-
-[source, bash]
-----
-
-> oc status
-In project sample on server https://10.2.2.2:8443
-
-svc/database - 172.30.174.52:5434 -> 3306
-  dc/database deploys docker.io/openshift/mysql-55-centos7:latest
-    deployment #1 deployed 3 days ago - 1 pod
-
-http://frontend-sample.apps.10.2.2.2.xip.io to pod port web (svc/frontend)
-  dc/frontend deploys istag/origin-ruby-sample:latest <-
-    bc/ruby-sample-build builds https://github.com/openshift/ruby-hello-world.git with sample/ruby-22-centos7:latest
-    deployment #1 deployed 3 days ago - 2 pods
-
-2 warnings identified, use 'oc status -v' to see details.
-
-----
-
-We will revisit explaining all of these terms as we go and build our own application.
 
 === Web Console
 
@@ -95,18 +64,51 @@ image::images/common/1_hawkular.png[]
 
 Again, you will be confronted with a invalide cert warning and go ahead go through to the Hawkular page. Now you have the cert stored for that page so the metrics will be viewable. 
 
-Now go back to the Projects page by clicking on the house with the word _Projects_ next to it in the top right corner of the page. 
+[TIP]
+====
+There could be several reasons why the URL doesn't resolve but the most common is that something is blocking the https://xip.io[xip.io] DNS resolution. I have seen several reasons for this: 
 
-image::images/common/1_projects.png[]
-
-Now click on the _sample_ project and then click on the URL on the page that goes to http://frontend-sample.apps.10.2.2.2.xip.io/ You should see a screen that looks like this:
-
-image::images/common/1_sample_app.png[]
-
-TIP: There could be several reasons why the URL doesn't resolve but the most common is that something is blocking the https://xip.io[xip.io] DNS resolution. I have seen several reasons for this: 
 1. The network is blocking alternate DNS resolution (very common on corporate networks)
 2. You have a DNS set as your DNS provider on your machine or your router that blocks xip.io. Some people have had luck switching their DNS provider to Google - 8.8.8.8 & 8.8.8.4 DNS servers
+====
 
-If both of theose steps then we are all set and we can actually move on to you getting some development done. 
+
+=== The Account we Will Use
+
+In the top left of the web console there is an icon with the word _admin_ next to it. Go ahead and click the icon and choose logout. 
+
+Now go ahead and login as the account we will use for most of the remaining exercises. In the username and password prompt go ahead and type _user_ and _user_ in both fields (again the password can really be anything you want). 
+
+Let's also log in as that user from the command line:
+
+
+[source, bash]
+----
+> oc login https://10.2.2.2:8443
+
+# on windows or if you get a cert. error do the following
+
+> oc login https://10.2.2.2:8443 --insecure-skip-tls-verify=true
+
+
+----
+
+Again use _user_ and _user_ for the username and password. After you are done you should see something like this:
+
+[source, bash]
+----
+$ oc login https://10.2.2.2:8443
+Authentication required for https://10.2.2.2:8443 (openshift)
+Username: user
+Password: 
+Login successful.
+
+You don't have any projects. You can try to create a new project, by running
+
+    oc new-project <projectname>
+
+----
+
+And with that we are ready to get down to business. Let's start by just using a plain Docker container image from Docker hub!
 
 <<<

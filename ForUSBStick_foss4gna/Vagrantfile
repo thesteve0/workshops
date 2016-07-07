@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
-  config.vm.box = "uberconf-origin"
+  config.vm.box = "origin"
 
   #
    config.vm.provider "virtualbox" do |vb|
@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "8024"
-     vb.name = "uberconf_origin"
+     vb.name = "foss4gna"
    end
   #
 

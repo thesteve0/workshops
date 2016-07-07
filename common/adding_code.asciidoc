@@ -4,13 +4,10 @@ Let's go ahead and start our own project using Python. I chose Python for this w
 
 
 === Bringing in the Code
-I am going to start with the command line but we will be moving back and forth between the command line and web UI today. 
 
 ==== Making a project
 
-First we are going to make a new project for today's workshop. Projects are a "place" to put together all the pieces you want to logically group. This is usually a single application but it actually could be mutliple applications with multiple URLs.
-
-At your command prompt go ahead and:
+Let's make a new project for this application:
 
 [source, bash]
 ----
@@ -20,14 +17,7 @@ Now using project "spatialapp" on server "https://10.2.2.2:8443"...
 
 ----
 
-That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project. To see all the projects that you have permissions to see go ahead and:
-
-[source, bash]
-----
-
-> oc get projects
-
-----
+That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project. 
 
 ==== Adding Code and Doing a Build
 

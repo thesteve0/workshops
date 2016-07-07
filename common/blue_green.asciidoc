@@ -1,0 +1,3 @@
+Show how to do a blue green with swapping services in a route
+
+Maybe canary with multiple services on a route

@@ -1,4 +1,4 @@
-= Running PostGIS in Containers At Scale
+= === https://uberconf.com/conference/denver/2016/07/session?id=35989[Application development with Docker, Kubernetes, and OpenShift]
 Steve Pousty
 :source-highlighter: coderay
 
@@ -6,17 +6,14 @@ Steve Pousty
 Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
 
 TODO 
-running an image (ngnix or apache)
-making that image into an s2i image
-adding health checks
-[Then all the stuff in the middle]
+
 Then making a template
 Then if time maybe a blue green deployment
 
 
-include::FOSS4GNA16/workshop_intro.asciidoc[]
+include::UberConf/workshop_intro.asciidoc[]
 
-include::FOSS4GNA16/install_vm.asciidoc[]
+include::UberConf/install_vm.asciidoc[]
 
 include::common/intro_to_os.asciidoc[]
 
@@ -24,11 +21,19 @@ include::common/intro_to_vm.asciidoc[]
 
 include::common/running_an_image.asciidoc[]
 
+include::common/source_to_image.asciidoc[]
+
+include::common/health_checks.asciidoc[]
+
 include::common/adding_code.asciidoc[]
 
 include::common/adding_database.asciidoc[]
 
 include::common/full_application.asciidoc[]
+
+include::common/templates.asciidoc[]
+
+include::common/blue_green.asciidoc[]
 
 
 ==== Here are some basic commands I found useful

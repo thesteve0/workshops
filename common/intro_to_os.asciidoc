@@ -17,6 +17,7 @@ image::images/common/OpenShiftAccessAndControlColour.png[]
 
 And here are the lower level pieces that make up the core objects.
 
+[[arch-image]]
 image::images/common/OpenShiftBuildsAndDeploymentsColour.png[]
 
 Finally, here is a diagram showing how an OpenShift/Kubernetes cluster is put together from different data center "pieces"
