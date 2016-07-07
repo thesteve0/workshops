@@ -1,11 +1,11 @@
-= === https://uberconf.com/conference/denver/2016/07/session?id=35989[Application development with Docker, Kubernetes, and OpenShift]
+= https://uberconf.com/conference/denver/2016/07/session?id=35989[Application development with Docker, Kubernetes, and OpenShift]
 Steve Pousty
 :source-highlighter: coderay
 
 == Slides Used in Class
-Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution. 
+Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution.
 
-TODO 
+TODO
 
 Then making a template
 Then if time maybe a blue green deployment
@@ -21,7 +21,7 @@ include::common/intro_to_vm.asciidoc[]
 
 include::common/running_an_image.asciidoc[]
 
-include::common/source_to_image.asciidoc[]
+// include::common/source_to_image.asciidoc[] need registry fix for this one
 
 include::common/health_checks.asciidoc[]
 
@@ -60,7 +60,7 @@ How to do a web request with cURL
 [source, bash]
 ----
 
-curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d '' 
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''
 
 ----
 
