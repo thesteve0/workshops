@@ -1,1 +1,65 @@
-https://docs.openshift.com/enterprise/3.0/dev_guide/application_health.html
+== Health Checks for Your Containers
+
+Thanks to the health check mechanisms built into Kubernetes, OpenShift just inherits a powerful way to make sure you app is running and responding. These check are over and above a container dying, which just automatically gets redeployed by OpenShift. Health checks are for the case where the pod is up and running but it is not actually "working" the way you intended.
+
+There are two basic types of health checks in OpenShift
+
+1. A liveness check - is the pod running and responding. If it is not then the cluster will kill and respawn the pod
+2. A readiness check - is the server in the pod ready to respond to requests. If it is not then the cluster will not route requests to it and not continue with the deployment
+
+The readiness check is helpful because it can prevent requests being sent to the pod until the pod is actually ready to serve content. This can be a problem with servers that take longer to become ready to serve content, such as some of the larger JavaEE servers or with a large database cluster.
+
+These checks can use HTTP responses, Socket Connections, or executing a command in the running container.  With the HTTP check, the cluster expects a response code of 200 or 399 for a live or ready pod. For a socket connection, the cluster just needs to be able to make a connection on the given port.
+
+You can read more about these checks in the https://docs.openshift.com/enterprise/3.0/dev_guide/application_health.html[OpenShift documentation].
+
+Let's go ahead and define each of these checks for our NGINX pod.
+
+=== Liveness Check
+
+If there is already a good check built into your docker container, then defining the check can be quite easy. In our example we could consider if we get a 200 from the root URL then it is alive.
+
+Let's try that first.
+
+Go to the web UI, on the left side pick Browse, and then choose Deployments:
+
+image::images/common/7_browse_deployments.png[]
+
+You will then see a list with one deployment, go ahead and select it. You are now looking at the details for your deployment. In the top left there is an actions button, go ahead and select it, and then choose "Edit Health Checks"
+
+image::images/common/7_edit_health.png[]
+
+On the landing page you see a nice description for each of the probe types. Let's go ahead and click on the link for "Add Liveness Probe". This will add a form to the page that allows us to define a liveness probe.
+
+Switch the port to 80 and the initial delay to 2 seconds. Then click "Save".
+
+image::images/common/7_live_http.png[]
+
+Now go back to the Overview page for your project. You will see a new pod come up and then the old one go down. You will also the deployment number increment, since we forced a new deployment.
+
+Go ahead and click on the pod and go to it's detailed view. This time click on the "Events" tab on the detail page. You will see some interesting information.
+
+image::images/common/7_failed_http.png[]
+
+Our liveness check is failing. And after it fails for a while, OpenShift says "This is broken, I am not going to try and deploy this anymore". If you go back to the overview page you can see that the circle has turned orange meaning there is an error.
+
+image::images/common/7_crashed_http.png[]
+
+NOTE: Can you guess why this isn't working even though NGINX is running. I gave you a hint at the end of the last exercise. I will answer this in class.
+
+Let's go ahead and fix the liveness probe. Go back to the "Edit Health Checks" page that I showed you above. Change the probe type to "TCP Socket" and then make sure the port is 80. Go ahead and click save. You will see that the pod gets redeployed and then it comes up blue and stays blue this time.
+
+=== Readiness Check
+
+Now that we have configured a liveness check let's go ahead and set up a readiness check. Again navigate back to the health checks configuration page. Go ahead and set up a readiness check. With a web application, ready means we can serve up the web pages we want, not just connect to a port. Therefore, we need to use a check that uses HTTP over port 80.
+
+image::images/common/7_ready_http.png[]
+
+Once you click save, if you go back to the overview you will see a new deployment kick off but then the screen will stay like this for a while:
+
+image::images/common/7_ready_stuck.png[]
+
+If you wait five minutes, the new deployment will go away and we will stay with the old pod. OpenShift won't continue the deployment until the new pod is ready to serve content. The same problem from above is the reason we are also failing here.
+
+=== Conclusion
+Given the current configuration of our Docker container image, we could take advantage of the liveness check but not the readiness check. With your own images you make, knowing these checks are available should help you in crafting an image that can take full advantage of the platform.
