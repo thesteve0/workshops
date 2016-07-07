@@ -34,11 +34,40 @@ To see all the projects that you have permissions to see go ahead and:
 
 Typically you will not bring in images directly from DockerHub because of the numerous flaws and vulnerabilities in DockerHub images. One big probem for many images on DockerHub is that they run as _root_ user when it is not even required. By default, an OpenShift cluster will not let you run images as _root_. In the case of the A1VM we turn off this security to allow for ease of use. 
 
-Today we will use an image 
+Let's go ahead and start with an NGINX image put out by the https://hub.docker.com/r/centos/nginx-16-centos7/[CentOS group]. Bringing this into our OpenShift environment is as simple as 
 
-oc new-app centos/nginx-16-centos7
+[source, bash]
+----
 
-https://hub.docker.com/r/centos/nginx-16-centos7/
+> oc new-app centos/nginx-16-centos7
+--> Found Docker image 32eebae (13 days old) from Docker Hub for "centos/nginx-16-centos7"
+
+    * An image stream will be created as "nginx-16-centos7:latest" that will track this image
+    * This image will be deployed in deployment config "nginx-16-centos7"
+    * Ports 443/tcp, 80/tcp will be load balanced by service "nginx-16-centos7"
+      * Other containers can access this service through the hostname "nginx-16-centos7"
+    * This image declares volumes and will default to use non-persistent, host-local storage.
+      You can add persistent volumes later by running 'volume dc/nginx-16-centos7 --add ...'
+    * WARNING: Image "centos/nginx-16-centos7" runs as the 'root' user which may not be permitted by your cluster administrator
+
+--> Creating resources with label app=nginx-16-centos7 ...
+    imagestream "nginx-16-centos7" created
+    deploymentconfig "nginx-16-centos7" created
+    service "nginx-16-centos7" created
+--> Success
+    Run 'oc status' to view your app.
+
+----
+
+The command 'oc new-app' actually does a lot of things for you. The idea behind new-app is to "do the right thing" when given a non-OpenShift artifact, I like to call it 'oc translate'. So in this case we are telling OpenShift, "here is a docker image, do you best to make all the pieces needed to make this run as a user would expect in OpenShift. 
+
+If you go back to the Web UI and look in the webpages project you should see something like this (may take a while depending on the time it takes to download the Docker image):
+
+image::images/common/6_one_docker_image.png[]
+
+Now is a good time to reflect back on the <<intro_to_os.asciidoc#arch-image, the architecture diagram>> I explained earlier and think about the objects created above. Start from the pod and work our way up to _Services_ and _Deployment Configurations_
+
+===Making a Route to our 
 
 Web content here:
 
@@ -50,3 +79,4 @@ echo  "hello world" > index.html
 Then reload page
 
 
+<<<
