@@ -4,7 +4,7 @@ To exercise the database some more we are going to change our python web applica
 
 Some of these are set by the platform "automagically" - these are usually network type variables like hosts to IP and port mappings. The others, that we need to handle manually right now are database name, username, and password. At the end of this section I will explain how we could have avoided having to manually do this.
 
-So as I explained above we got the network pieces for free. Let's add the env variables to the deployment configuration (dc) for the python code. We add it to the dc so it becomes available to all pods controlled by the dc. We will start with the read operations from the DB so we will use the slave pods for those operations. 
+So as I explained above we got the network pieces for free. Let's add the env variables to the deployment configuration (dc) for the python code. We add it to the dc so it becomes available to all pods controlled by the dc. We will start with the read operations from the DB so we will use the slave pods for those operations.
 
 In your browser go to the Browse -> Deployments
 
@@ -20,11 +20,11 @@ Now that we have these we just have to do a simple command:
 ----
 
 > oc set env dc/v3simple-spatial PG_DATABASE=userdb PG_USER=postgres  PG_ROOT_PASSWORD=WM4vPCCAGyt2
-deploymentconfig "v3simple-spatial" updated 
+deploymentconfig "v3simple-spatial" updated
 
 ----
 
-This will force a redeployment of the pods to get the new environment variables. We have to do this redeployment because remember, containers are immutable. 
+This will force a redeployment of the pods to get the new environment variables. We have to do this redeployment because remember, containers are immutable.
 
 With that step done we can now modify our python code. I have the completed example as 2_app.py in the github repo. The steps we did to make this code change was
 
@@ -35,7 +35,7 @@ psycopg2==2.6.1
 
 ----
 
-* Added lines to the app.py to make the connection to the slave *service* with the proper credentials. Then on a GET request we return back some simple information from the database. 
+* Added lines to the app.py to make the connection to the slave *service* with the proper credentials. Then on a GET request we return back some simple information from the database.
 
 WARNING: This code is in NO WAY production type code. This code is trying to be as simple as possible so you learn the basic patterns. In a real app you would not load a DB connection on every request, you would check for exceptions, and you would have more optimized queries.
 
@@ -54,22 +54,22 @@ After either of those steps go ahead and do the following commands in the v3simp
 
 ----
 
-Then back in your web console you can fire off another build like you did in the last exercise. After the build and deploy is finished when you go to http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db  the first 10 entries in the table. 
+Then back in your web console you can fire off another build like you did in the last exercise. After the build and deploy is finished when you go to http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db  the first 10 entries in the table.
 
 === Writing to Master
 
-The great part of what we have set up is we can isolate our writes to master and our reads from the replica - which is why people usually set up replicas in the first place. 
+The great part of what we have set up is we can isolate our writes to master and our reads from the replica - which is why people usually set up replicas in the first place.
 
-We have already set all the environment variables we need so really it is just editing the code. The only change we need to make to the new code is to have the connection be to the master rather than the replica. Other than that the connection parameters stay the same. In a more production ready app you would probably use two different Postgresql accounts, one for reading and one for writing, which would require new environment variables. 
+We have already set all the environment variables we need so really it is just editing the code. The only change we need to make to the new code is to have the connection be to the master rather than the replica. Other than that the connection parameters stay the same. In a more production ready app you would probably use two different Postgresql accounts, one for reading and one for writing, which would require new environment variables.
 
-I added code to randomly generate a name and the coords for a new point whenever you HTTP POST to the /db URL. Again this is really hacky code for a workshop - not production code. I will talk you through the code in class. 
+I added code to randomly generate a name and the coords for a new point whenever you HTTP POST to the /db URL. Again this is really hacky code for a workshop - not production code. I will talk you through the code in class.
 
 Remember, to make the code change there are two ways to proceed:
 
 1. Either type or copy the code changes you see in 3_app.py into app.py
 2. Go ahead and rename app.py to 2_app.py and then rename 3_app.py to app.py
 
-Don't forget to do the git commands I gave you above and then fire off another build. 
+Don't forget to do the git commands I gave you above and then fire off another build.
 
 Finally, to hit this URL you can either install a plugin for your browser or you can use cURL. By default browsers do an HTTP GET but we need a POST. There are plenty of plugins for Chrome and Firefox to help you do a HTTP Post - most of them have the word REST in them. Here is cURL syntax that will exercise the end point:
 
@@ -77,7 +77,7 @@ Finally, to hit this URL you can either install a plugin for your browser or you
 ----
 
 # -d says to do a POST and we leave the payload blank
-curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d '' 
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''
 
 # if you want to look at the output in a nicer format you can save it to HTML
 curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''  > index.html
@@ -87,7 +87,7 @@ curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''  > index
 
 If you use a browser plugin the URL stays the same and you just tell the plugin to use a POST.
 
-The response will be the last 10 entries in the DB - which will include your latest entry. You can go ahead and POST several items and watch the new entries show up. 
+The response will be the last 10 entries in the DB - which will include your latest entry. You can go ahead and POST several items and watch the new entries show up.
 
 
 <<<

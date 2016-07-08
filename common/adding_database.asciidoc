@@ -1,6 +1,6 @@
 == Adding a Database
 
-Now it's time to get to the part of the workshop you have all been waiting for - getting PostGIS up and running! Before we do this though I need to explain just a bit more about how OpenShift works. 
+Now it's time to get to the part of the workshop you have all been waiting for - getting PostGIS up and running! Before we do this though I need to explain just a bit more about how OpenShift works.
 
 All of this work we have done so far has created entries in a database internal to OpenShift (stored in etcd to be exact). You can actually get OpenShift to give you back this information in YAML or JSON format. You can then take that information and give it to another OpenShift instance and get the exact same infrastructure. You can also edit or distribute that JSON or YAML to other people as configuration for their applications. We call these JSON or YAML files templates.
 
@@ -20,13 +20,13 @@ This will give you the JSON for the services, deploymentConfigs, and buildConfig
 
 === Generating the Database Pieces
 
-In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _examples/openshift_ directory. We are going to use the file _master-slave-rc-pg-env-vars.json_ and you can open it in your favorite text editor now. I am not expecting you to understand it but I want to show you the parameters. Now that we are done talking about it let's do it:
+In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _examples/openshift/master-slave-dc_ directory. We are going to use the file _master-slave-rc-dc-slaves-only.json_ and you can open it in your favorite text editor now. I am not expecting you to understand it but I want to show you the parameters. Now that we are done talking about it let's do it:
 
 
 [source, bash]
 ----
 
- > oc new-app .\master-slave-rc-pg-env-vars-with-collect.json
+ > oc new-app .\master-slave-rc-dc-slaves-only.json
 
 ----
 
@@ -34,7 +34,7 @@ That's it - thanks to the work by Jeff you now have a master-replica PostGIS dat
 
 === Loading the Database
 
-Let's go ahead and load up the database in the master with some DDL. In the v3simple-spatial repository https://github.com/thesteve0/v3simple-spatial.git there is already a SQL file with all our DDL statements. Please clone the repository and then change into the root of the repository. 
+Let's go ahead and load up the database in the master with some DDL. In the v3simple-spatial repository https://github.com/thesteve0/v3simple-spatial.git there is already a SQL file with all our DDL statements. Please clone the repository and then change into the root of the repository.
 
 [source, bash]
 ----
@@ -45,13 +45,13 @@ pg-master-rc-1-abvxb   1/1       Running   0          2d
 pg-slave-rc-1-obd02    1/1       Running   0          2d
 
 #Look for the conainer named server - we will need this below
-> oc describe pods pg-master-rc-1-abvxb 
+> oc describe pods pg-master-rc-1-abvxb
 
  oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/. -c server
 
 ----
 
-You may receive a warning that rsync is not found on your machine but the command line tool will fall back to other methods to try and copy the files over. We have now put the DDL file in _/tmp/ddl_ in the Master postgis pod. 
+You may receive a warning that rsync is not found on your machine but the command line tool will fall back to other methods to try and copy the files over. We have now put the DDL file in _/tmp/ddl_ in the Master postgis pod.
 
 Let's shell into that same pod and load the data
 
@@ -104,19 +104,19 @@ In that terminal go ahead and type the following commands:
 ----
 sh-4.2$ psql userdb
 psql (9.5.2)
-Type "help" for help. 
+Type "help" for help.
 
 userdb=# select count(*) from parkpoints;
 count
----    
-547  
+---
+547
 (1 row)
 
 ----
 
-Do you REALIZE what just happened. We entered data into the Master DB and it was automatically replicated over to the slave DB and did 0 work to make sure that would happen. 
+Do you REALIZE what just happened. We entered data into the Master DB and it was automatically replicated over to the slave DB and did 0 work to make sure that would happen.
 
-=== Time for More Replication Magic. 
+=== Time for More Replication Magic.
 
 Let's take this to even another level. In the web console, go back to the overview again and then click on the little up arrow next to the slave pods:
 
@@ -124,7 +124,6 @@ image::images/common/3_scale.png[]
 
 The number inside the circle will increment to 2 and then the blue circle will fill in the rest of the circle. You now have 2 replicas running. If you click on the circle again you will see the list of the two pods. If you click on the new pod and then do the commands above you will see that it has already been replicated to the new replica.
 
-In the next section we will write an application to use the slaves and the replicas. Make sure you have cloned the v3simple-spatial repo. to the local machine.
+In the next section we will write an application to use the master and the replicas. Make sure you have cloned the v3simple-spatial repo. to the local machine.
 
 <<<
-
