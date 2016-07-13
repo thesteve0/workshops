@@ -10,7 +10,9 @@ Go back into the crunchy-containers repo on your local machine and go into _exam
 
 [source, bash]
 ----
-
+> export CCP_IMAGE_TAG=centos7-9.5-1.2.2
+> export BUILDBASE=$HOME/crunchy-containers
+> cd $BUILDBASE/examples/openshift/metrics
 > ./run.sh
 
 ----
