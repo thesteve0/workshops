@@ -1,6 +1,6 @@
 == Installing the Vagrant Box
 
-Let's go ahead and install the Vagrant box file and get everything up and running. 
+Let's go ahead and install the Vagrant box file and get everything up and running.
 
 
 === Hardware Requirements
@@ -14,6 +14,8 @@ WARNING: You must do this *BEFORE* the class - we will not have time to do this 
 
 1. Install https://www.virtualbox.org/wiki/Downloads[VirtualBox]
 2. Install https://www.vagrantup.com/downloads.html[Vagrant]
+
+VirtualBox is a requirement. I know some of you have parallels and vmware and other virtualization tech but I only built the image for VirtualBox. My reasoning for doing this is that it is the only FOSS VM software out there. Sorry but that's the breaks.
 
 === Account requirements
 
@@ -34,7 +36,7 @@ Clone the Crunchy DB code https://github.com/CrunchyData/crunchy-containers (opt
 
 === Getting the Vagrant box on your local machine
 
-In the _os_workshop_ directory make a directory titled _vagrant_ and change into it. 
+In the _os_workshop_ directory make a directory titled _vagrant_ and change into it.
 
 ---
 ==== Using the box on Atlas
@@ -45,11 +47,11 @@ If you are doing this at home (which I hope you did before the class) do the fol
 [source, bash]
 ----
 C:\_os_workshop\vagrant> vagrant init thesteve0/uberconf-openshift-origin
-C:\_os_workshop\vagrant> vagrant up
+C:\_os_workshop\vagrant> vagrant up --provider=virtualbox
 
 ----
 
-There is a 4.6 Gig file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up. 
+There is a 4.6 Gig file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up.
 
 ---
 
@@ -110,9 +112,9 @@ When "vagrant up" is done you should see a message that ends with:
 ==> default: $ oc login https://10.2.2.2:8443
 ----
 
-If this doesn't happen raise your hand or, if you are a good student and did this at home, email me.  If you see this then you have installed everything properly. 
+If this doesn't happen raise your hand or, if you are a good student and did this at home, email me.  If you see this then you have installed everything properly.
 
-I know some of you are going to be curious and are going to start playing with this VM. That's OK! 
+I know some of you are going to be curious and are going to start playing with this VM. That's OK!
 
 Right before class (or if you break it) you just need to do the following steps:
 
@@ -120,7 +122,7 @@ Right before class (or if you break it) you just need to do the following steps:
 ----
 C:\_os_workshop\vagrant>vagrant destroy --force
 C:\_os_workshop\vagrant>rm -rf .vagrant #basically delete the .vagrant dir - I do it bc I am superstitious
-C:\_os_workshop\vagrant>vagrant up
+C:\_os_workshop\vagrant>vagrant up --provider=virtualbox
 ----
 
 You don't even need to be online for this command to work! Welcome to the future.
