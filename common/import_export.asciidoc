@@ -1,0 +1,14 @@
+oc export is,dc,svc,bc --as-template=json > simple_spatial.json
+
+Then replace the spatialapp with testapp and remove the sha from the docker image
+
+
+oc export pod pg-master-rc-dc -o json > master_pod.json
+
+remove the status line at the end
+
+now oc new-app this file as well
+
+Can't get this pod to deploy though. I think it is some sort of permissions issue - one last try and I think we need to create the master first so when the slave comes up it can see it (maybe)
+
+Really maybe I should just do this after we create the sample-app without the DB. Or maybe even when we just do the plain docker image - nice simple JSON and should be easy to do. 

@@ -5,10 +5,10 @@ Steve Pousty
 == Slides Used in Class
 Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution.
 
-TODO
+//TODO
 
-Then making a template
-Then if time maybe a blue green deployment
+//Then making a template
+//Then if time maybe a blue green deployment
 
 
 include::UberConf/workshop_intro.asciidoc[]
@@ -36,7 +36,7 @@ include::common/templates.asciidoc[]
 include::common/blue_green.asciidoc[]
 
 
-==== Here are some basic commands I found useful
+== Appendix: Here are some basic commands I found useful
 
 How to build the documentation
 

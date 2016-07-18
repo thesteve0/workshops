@@ -1,1 +1,3 @@
 Show the template from our final app, show others, and then some hints on how to build them
+
+oc export all --as-template=json > myTemplate.json

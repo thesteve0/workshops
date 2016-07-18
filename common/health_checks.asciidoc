@@ -63,3 +63,7 @@ If you wait five minutes, the new deployment will go away and we will stay with 
 
 === Conclusion
 Given the current configuration of our Docker container image, we could take advantage of the liveness check but not the readiness check. With your own images you make, knowing these checks are available should help you in crafting an image that can take full advantage of the platform.
+
+NOTE: Please delete the current project as we will no longer need it. We are now actually going to move on to working with code and databases.
+
+<<<

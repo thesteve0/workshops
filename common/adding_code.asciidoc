@@ -17,7 +17,7 @@ Now using project "spatialapp" on server "https://10.2.2.2:8443"...
 
 ----
 
-That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project. 
+That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project.
 
 ==== Adding Code and Doing a Build
 
@@ -42,14 +42,14 @@ Our code is ready. Let's fire off the build and deploy. In your terminal enter t
 [source, bash]
 ----
 
-> oc new-app python:3.3~https://github.com/thesteve0/v3simple-spatial.git
---> Found image 596ac47 (11 days old) in image stream "python" in project "openshift" under tag "2.7" for "python:2.7"
+> oc new-app python:3.5~https://github.com/thesteve0/v3simple-spatial.git
+--> Found image 87d749a (2 weeks old) in image stream "python" in project "openshift" under tag "3.5" for "python:3.5"
 
-    Python 2.7 
-    ---------- 
-    Platform for building and running Python 2.7 applications
+    Python 3.5
+    ----------
+    Platform for building and running Python 3.5 applications
 
-    Tags: builder, python, python27, rh-python27
+    Tags: builder, python, python35, rh-python35
 
     * A source build using source code from https://github.com/thesteve0/v3simple-spatial.git will be created
       * The resulting image will be pushed to image stream "v3simple-spatial:latest"
@@ -69,9 +69,7 @@ Our code is ready. Let's fire off the build and deploy. In your terminal enter t
 ----
 
 
-What we just did is told OpenShift - take this https://github.com/openshift/s2i-python[Docker Image] that knows how to build a standard Python application layout and combine it with this source code and produce a new Docker Image. As part of this process the _new-app_ command knows we will need some other OpenShift objects to actually run that resulting image. The command goes ahead and makes those objects as well. 
-
-TIP: TAKE A BREAK RIGHT HERE BECAUSE I AM GOING TALK YOU THROUGH ALL THOSE OBJECTS IT JUST BUILT. YOU WILL NEED THE DIAGRAMS FROM THE "INTRODUCTION TO OPENSHIFT" TO REFER TO.
+What we just did is told OpenShift - take this https://github.com/openshift/s2i-python[Docker Image] that knows how to build a standard Python application layout and combine it with this source code and produce a new Docker Image. As part of this process the _new-app_ command knows we will need some other OpenShift objects to actually run that resulting image. The command goes ahead and makes those objects as well.
 
 ==== Looking at what we built. 
 
@@ -81,9 +79,9 @@ Your screen should look something like this:
 
 image::images/common/2_create_route.png[]
 
-You can see that we have the 1 pod running our image that was derived from our source code and our builder image. There is also other metadata in the box for the pod that we can return to later. For now I want you to click on the _Create Route_ button that is highlighted in red. This will create a URL where we can see the web page for our pod. By default, nothing is exposed to the outside world and you have to choose to expose it. 
+You can see that we have the 1 pod running our image that was derived from our source code and our builder image. There is also other metadata in the box for the pod that we can return to later. For now I want you to click on the _Create Route_ button that is highlighted in red. This will create a URL where we can see the web page for our pod. By default, nothing is exposed to the outside world and you have to choose to expose it.
 
-Just click _Create_ on the next page that comes up - all the defaults are fine for our us. You could have also done this at the command line with 
+Just click _Create_ on the next page that comes up - all the defaults are fine for our us. You could have also done this at the command line with
 
 [source, bash]
 ----
@@ -100,9 +98,9 @@ You have now all built and deployed containers with a working URL - give yoursel
 
 === Doing Code Changes With a Build
 
-While that web page is AWESOME, you might actually want to change it. OpenShift gives you the ability to change the code in a "hot swap" fasion for rapid iteration development or in a more complete build cycle which creates a new image. For now we will do the more complete build cycle and the "hot swap" later. 
+While that web page is AWESOME, you might actually want to change it. OpenShift gives you the ability to change the code in a "hot swap" fasion for rapid iteration development or in a more complete build cycle which creates a new image. For now we will do the more complete build cycle and the "hot swap" later.
 
-Go ahead to your GitHub fork and edit the app.py file right there in GitHub. When looking at the GitHub repo., click on app.py and then on the next page click on the pencil icon in the top right. 
+Go ahead to your GitHub fork and edit the app.py file right there in GitHub. When looking at the GitHub repo., click on app.py and then on the next page click on the pencil icon in the top right.
 
 image::images/common/2_edit_github.png[]
 
@@ -126,11 +124,11 @@ v3simple-spatial   Source    Git       1
 
 ----
 
-2) You can also use the web console. Click on Browse in the left menu and then choose the builds. 
+2) You can also use the web console. Click on Browse in the left menu and then choose the builds.
 
 image::images/common/2_builds.png[]
 
-There will only be one build listed on the page, go ahead and click it. Then on the next page in the upper right you will see a button "Start Build", go ahead and click it. 
+There will only be one build listed on the page, go ahead and click it. Then on the next page in the upper right you will see a button "Start Build", go ahead and click it.
 
 image::images/common/2_start_builds.png[]
 
@@ -138,12 +136,12 @@ On the next page you can look at the what is happening by clicking on the "View 
 
 image::images/common/2_builds_log.png[]
 
-In the terminal on the resulting page you can watch the entire build and push progress: just like you could in the command line with the --follow flag. 
+In the terminal on the resulting page you can watch the entire build and push progress: just like you could in the command line with the --follow flag.
 
-With either the command line or the web console, when you go back to the Overview for your project you will notice that the number next to the deployments has incremented because we have actually done a build AND deployment as part of this process. 
+With either the command line or the web console, when you go back to the Overview for your project you will notice that the number next to the deployments has incremented because we have actually done a build AND deployment as part of this process.
 
 You are now certified in the Pousty School of Docker and Cloud management as having completed build and deploy MASTERS!
 
-In the next section we will now move on to add PostGIS to your application. 
+In the next section we will now move on to add PostGIS to your application.
 
 <<<
