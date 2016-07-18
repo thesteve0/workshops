@@ -6,12 +6,14 @@ We already added the pieces to our Postgresql pods when we use the template duri
 
 === Adding the collection and display pieces
 
-Go back into the crunchy-containers repo on your local machine and go into _examples/openshift/scope_ then execture this command:
+Go back into the crunchy-containers repo on your local machine and go into _examples/openshift/metrics_ then execture this command:
 
 [source, bash]
 ----
-
-> oc new-app scope.json
+> export CCP_IMAGE_TAG=centos7-9.5-1.2.2
+> export BUILDBASE=$HOME/crunchy-containers
+> cd $BUILDBASE/examples/openshift/metrics
+> ./run.sh
 
 ----
 
@@ -31,7 +33,7 @@ Then you get a much simpler box - go ahead and fill it out with the values you s
 
 * Name: crunchy
 * Type: prometheus
-* Url:  http://crunchy-scope:9090
+* Url:  http://crunchy-prometheus:9090
 
 image::images/common/5_datasource_details.png[]
 
