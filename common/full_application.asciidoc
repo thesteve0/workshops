@@ -1,5 +1,6 @@
 == Full Application with Database
 
+
 To exercise the database some more we are going to change our python web application to read and write from the PostGIS master and slave services. When using OpenShift the way to handle the connection paramters to the DB are handled through environment variables. Rather than hard coding in IP addresses or username/passwords we set environment variables that actually point to those values.
 
 Some of these are set by the platform "automagically" - these are usually network type variables like hosts to IP and port mappings. The others, that we need to handle manually right now are database name, username, and password. At the end of this section I will explain how we could have avoided having to manually do this.
@@ -19,7 +20,7 @@ Now that we have these we just have to do a simple command:
 [source, bash]
 ----
 
-> oc set env dc/v3simple-spatial PG_DATABASE=userdb PG_USER=postgres  PG_ROOT_PASSWORD=WM4vPCCAGyt2
+> oc set env dc/simple-spatial PG_DATABASE=userdb PG_USER=postgres  PG_ROOT_PASSWORD=password
 deploymentconfig "v3simple-spatial" updated
 
 ----

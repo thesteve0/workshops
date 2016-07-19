@@ -67,7 +67,7 @@ First we need to export the JSON (my preferred format) for our existing applicat
 
 [source, console]
 ----
-oc export is,dc,svc,bc,route --as-template=json > simple_spatial.json
+oc export is,dc,svc,bc,route --as-template=json -o json > simple_spatial.json
 ----
 
 We have now created a template that lists all of our project resources, except pods, as a template. We do not export the pods because we actually want our project to recreate the new pods.
@@ -80,7 +80,18 @@ If we wanted to move the pods over exactly then we would have to put the contain
 oc new-project newproject
 ----
 
-3. Open simple-spatial.json in your favorite text editor. After you do that do a global search and replace of "spatialapp" with "newproject".
+3. Open simple_spatial.json in your favorite text editor. After you do that do a global search and replace of "spatialapp" with "newproject". And remove the Sha signature from the item that looks like:
+
+[source, console]
+----
+BEFORE
+  - image: 172.30.182.216:5000/spatialapp/simple-spatial@sha256:b0379d1e921087aa267a9bb5e4602d1ec51948f88dfd83c4d65f24c133654102
+
+AFTER
+
+- image: 172.30.182.216:5000/newproject/simple-spatial
+
+----
 
 4. Make sure you are in the newproject project and then just do the new-app command on simple-spatial.json
 

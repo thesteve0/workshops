@@ -26,7 +26,7 @@ In the terminal, please go to the location on your machine where you cloned the 
 [source, bash]
 ----
 
- > oc new-app -p CCP_IMAGE_TAG=1.2.1 .\master-slave-rc-dc-slaves-only.json
+ > oc new-app -p CCP_IMAGE_TAG=1.2.1 master-slave-rc-dc-slaves-only.json
 
 ----
 
@@ -41,13 +41,13 @@ Let's go ahead and load up the database in the master with some DDL. In the v3si
 # we need to get the master pod - it will have a different name on your machine
 > oc get pods
 NAME                   READY     STATUS    RESTARTS   AGE
-pg-master-rc-1-abvxb   1/1       Running   0          2d
+pg-master-rc-dc        1/1       Running   0          2d
 pg-slave-rc-1-obd02    1/1       Running   0          2d
 
 #Look for the conainer named server - we will need this below
-> oc describe pods pg-master-rc-1-abvxb
+> oc describe pods pg-master-rc-dc
 
- oc rsync ./ddl pg-master-rc-1-abvxb:/tmp/. -c server
+ oc rsync ./ddl pg-master-rc-dc:/tmp/. -c server
 
 ----
 
@@ -58,7 +58,7 @@ Let's shell into that same pod and load the data
 [source, bash]
 ----
 
-> oc rsh -c server pg-master-rc-1-abvxb
+> oc rsh -c server pg-master-rc-dc
 sh-4.2$ psql -l
                              List of databases
    Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges

@@ -81,7 +81,8 @@ Then in that directory do the following commands:
 [source, bash]
 ----
 
-C:\_os_workshop\vagrant> vagrant box add --name uberconf-origin uberconf-openshift-origin.box
+C:\_os_workshop\vagrant> vagrant box add --name uberconf-origin <sd card>\uberconf-openshift-origin.box
+C:\_os_workshop\vagrant> vagrant init uberconf-origin
 C:\_os_workshop\vagrant> vagrant up --provider=virtualbox
 
 ----

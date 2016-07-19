@@ -1,11 +1,6 @@
-////
- expect another asciidoc before this that introduces the workshop
- also another page on how to install the VM - this will cover manual installation when you have been given a box file
-////
-
 == Introduction to the OpenShift All-In-One VM
 
-Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM. If not please refer to [TODO LINK TO PAGE]. It is also assumed you downloaded the OpenShift command line tools and put them in your PATH - if not please refer to [TODO LINK TO PAGE]
+Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM and command line tools. 
 
 The all-in-one VM (A1VM) is intended for a developer or sysadmin to have a quick and easy way to use OpenShift (which also is a great way to use Kubernetes). The focus of the A1VM is:
 
@@ -30,7 +25,7 @@ And with that we begin the journey. Our first step will be to login to the VM bo
 
 ----
 
-You should be prompted for a username and passsword. For ease of use, in the workshop, we will use username _admin_ password _password_. You can actually use any password you want with the admin account. You can also use any username and password you want. The username will "matter" in that any project created in that username can only be seen by that username - but these are not secure accounts. Remember - the focus of this VM is ease of use.
+You should be prompted for a username and passsword. For ease of use, in the workshop, we will use username _user_ password _password_. You can actually use any password you want with the admin or user account. You can also use any username and password you want. The username will "matter" in that any project created in that username can only be seen by that username - but these are not secure accounts. Remember - the focus of this VM is ease of use.
 
 After logging in you should see the following message
 
@@ -39,14 +34,9 @@ After logging in you should see the following message
 
 Login successful.
 
-You have access to the following projects and can switch between them with 'oc project <projectname>':
+You don't have any projects. You can try to create a new project, by running
 
-  * default (current)
-  * openshift
-  * openshift-infra
-  * sample
-
-Using project "default".
+    oc new-project <projectname>
 
 ----
 
@@ -54,60 +44,12 @@ Using project "default".
 
 === Web Console
 
-Now in your browser go to https://10.2.2.2:8443 . You will get a warning about the certificate and this is to be expected since we are using self-signed certificates throughout the installation - so we will need to work around this. You will then get to the login screen. Again use the _admin_ and _admin_ username password combination and you should see something that looks like this (except for the red box):
+Now in your browser go to https://10.2.2.2:8443 . You will get a warning about the certificate and this is to be expected since we are using self-signed certificates throughout the installation - so we will need to work around this. You will then get to the login screen. Again use the _user_ and _password_ username password combination and you should see something that looks like this (except for the red box):
 
 image::images/common/1_login.png[]
 
-Later in the workshops we will be looking at metrics for our resources and to get that to work we need to accept another self-signed SSL certificate. Please click on the _openshift-infra_ project and make sure all the circles are blue. If they are not all blue, they should turn blue in about a minute. If they do not turn blue please raise your hand and call someone over. Now click on the link for https://hawkular-metrics.apps.10.2.2.2.xip.io/ (you can even do it in this document and it should resolve properly)
+Now go ahead and login as the account we will use for most of the remaining exercises. In the username and password prompt go ahead and type _user_ and _user_ in both fields (again the password can really be anything you want).
 
-image::images/common/1_hawkular.png[]
-
-Again, you will be confronted with a invalide cert warning and go ahead go through to the Hawkular page. Now you have the cert stored for that page so the metrics will be viewable. 
-
-[TIP]
-====
-There could be several reasons why the URL doesn't resolve but the most common is that something is blocking the https://xip.io[xip.io] DNS resolution. I have seen several reasons for this: 
-
-1. The network is blocking alternate DNS resolution (very common on corporate networks)
-2. You have a DNS set as your DNS provider on your machine or your router that blocks xip.io. Some people have had luck switching their DNS provider to Google - 8.8.8.8 & 8.8.8.4 DNS servers
-====
-
-
-=== The Account we Will Use
-
-In the top left of the web console there is an icon with the word _admin_ next to it. Go ahead and click the icon and choose logout. 
-
-Now go ahead and login as the account we will use for most of the remaining exercises. In the username and password prompt go ahead and type _user_ and _user_ in both fields (again the password can really be anything you want). 
-
-Let's also log in as that user from the command line:
-
-
-[source, bash]
-----
-> oc login https://10.2.2.2:8443
-
-# on windows or if you get a cert. error do the following
-
-> oc login https://10.2.2.2:8443 --insecure-skip-tls-verify=true
-
-
-----
-
-Again use _user_ and _user_ for the username and password. After you are done you should see something like this:
-
-[source, bash]
-----
-$ oc login https://10.2.2.2:8443
-Authentication required for https://10.2.2.2:8443 (openshift)
-Username: user
-Password: 
-Login successful.
-
-You don't have any projects. You can try to create a new project, by running
-
-    oc new-project <projectname>
-
-----
 
 And with that we are ready to get down to business. Let's start by just using a plain Docker container image from Docker hub!
 

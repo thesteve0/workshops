@@ -56,7 +56,8 @@ How to do a web request with cURL
 [source, bash]
 ----
 
-curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''
+curl 'curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''
+' -d ''
 
 ----
 
