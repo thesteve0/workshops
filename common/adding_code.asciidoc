@@ -42,8 +42,8 @@ Our code is ready. Let's fire off the build and deploy. In your terminal enter t
 [source, bash]
 ----
 
-> oc new-app python:3.5~https://github.com/thesteve0/v3simple-spatial.git
---> Found image 87d749a (2 weeks old) in image stream "python" in project "openshift" under tag "3.5" for "python:3.5"
+> oc new-app python@sha256:bb47c81~https://github.com/thesteve0/v3simple-spatial.git
+--> Found image 87d749a (4 weeks old) in image stream "python" in project "openshift" under tag "3.5" for "python:3.5"
 
     Python 3.5
     ----------
@@ -71,7 +71,7 @@ Our code is ready. Let's fire off the build and deploy. In your terminal enter t
 
 What we just did is told OpenShift - take this https://github.com/openshift/s2i-python[Docker Image] that knows how to build a standard Python application layout and combine it with this source code and produce a new Docker Image. As part of this process the _new-app_ command knows we will need some other OpenShift objects to actually run that resulting image. The command goes ahead and makes those objects as well.
 
-==== Looking at what we built. 
+==== Looking at what we built.
 
 At this point we are going to switch back to the web terminal since it is easier to look at web sites in a browser. Go ahead and go into your browser and go to the projects page. Once you are looking at all your projects go ahead and click on _spatialapp_.
 
@@ -142,6 +142,6 @@ With either the command line or the web console, when you go back to the Overvie
 
 You are now certified in the Pousty School of Docker and Cloud management as having completed build and deploy MASTERS!
 
-In the next section we will now move on to add PostGIS to your application.
+In the next section we look under the hoods to the declarative syntax that OpenShift uses under the hoods. After that we  will move on to add PostGIS to your application.
 
 <<<

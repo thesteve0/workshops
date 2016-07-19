@@ -5,11 +5,6 @@ Steve Pousty
 == Slides Used in Class
 Both http://bit.ly/v3workshop[the slides] and these workshop notes are released under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing free use as long you provide attribution.
 
-//TODO
-
-//Then making a template
-//Then if time maybe a blue green deployment
-
 
 include::UberConf/workshop_intro.asciidoc[]
 
@@ -27,14 +22,15 @@ include::common/health_checks.asciidoc[]
 
 include::common/adding_code.asciidoc[]
 
+include::common/templates.asciidoc[]
+
 include::common/adding_database.asciidoc[]
 
 include::common/full_application.asciidoc[]
 
-include::common/templates.asciidoc[]
+//include::common/blue_green.asciidoc[]
 
-include::common/blue_green.asciidoc[]
-
+<<<
 
 == Appendix: Here are some basic commands I found useful
 

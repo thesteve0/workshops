@@ -1,4 +1,4 @@
-== Simple Web Application
+== Full Application with Database
 
 To exercise the database some more we are going to change our python web application to read and write from the PostGIS master and slave services. When using OpenShift the way to handle the connection paramters to the DB are handled through environment variables. Rather than hard coding in IP addresses or username/passwords we set environment variables that actually point to those values.
 
