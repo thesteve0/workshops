@@ -7,16 +7,11 @@ Both http://bit.ly/v3workshop[the slides] and these workshop notes are released
 under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing
 free use as long you provide attribution.
 
-//TODO My new thinking!
-// Load the DB first since that flows better from running an image. But that also
-// means I need to also move template to right after running an image.
-// Templates should also have a short section discussing how to make a template (using the export)
-// Need a wrap up section that summarizes how great it is to develop on OpenShift
-// They are overwhelmed by the end of the day and need to wrap it up in a nice way
+//WARNING REWRITE THE MASTER CONTENT BEFORE TAKING THIS ON
 
-
+//REWRITE THIS
 include::UberConf/workshop_intro.asciidoc[]
-
+//REWRITE THIS
 include::UberConf/install_vm.asciidoc[]
 
 include::common/intro_to_os.asciidoc[]
@@ -25,23 +20,26 @@ include::common/intro_to_vm.asciidoc[]
 
 include::common/running_an_image.asciidoc[]
 
-include::common/health_checks.asciidoc[]
-
-//todo REWRITE GIVEN NEW ORDER
 include::common/templates.asciidoc[]
 
-//todo REWRITE GIVEN NEW ORDER
 include::common/adding_database.asciidoc[]
 
-//todo REWRITE GIVEN NEW ORDER
+//todo REWRITE TO JUST BE ADDING ALL THE CODE - SO COMBINE THE TWO CHAPTERS
 include::common/adding_code.asciidoc[]
 
 //todo REWRITE GIVEN NEW ORDER
 include::common/full_application.asciidoc[]
 
-// include::common/source_to_image.asciidoc[] need registry fix for this one
+//todo write this
+include::common/pg_metrics.asciidoc[]
 
-//include::common/blue_green.asciidoc[]
+//todo write this
+include::common/pg_backup.asciidoc[]
+
+//todo maybe write this
+//need Jeff or Paul to decide which to show
+// PGBouncer or CrunchyWatch
+include::common
 
 <<<
 
