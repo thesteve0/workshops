@@ -36,8 +36,17 @@ $ yum install docker --exclude docker-1.10* --exclude docker-selinux-1.10*
 
 ==== Summary
 
-Now you have a machine that is ready to build Docker images based on RHEL. These instructions are
-for a very minimal RHEL install. You will probably find that you need other tools installed on the
+Now you have a machine that is ready to build Docker images based on RHEL. Any Docker image you build on this
+box will get it's enablement from the underlying host OS. So now you can start your Dockerfile with:
+
+[source, bash]
+-----
+FROM rhel:7.2-released
+-----
+
+and it should just work.  Here is an example of a Docker build file that should work for you - https://github.com/sclorg/rhscl-dockerfiles/blob/master/rhel7.s2i-base/Dockerfile
+
+These instructions are for a very minimal RHEL install. You will probably find that you need other tools installed on the
 machine as well. Go ahead and add any other tools you want. Don't forget about https://fedoraproject.org/wiki/EPEL[EPEL]
 for packages not found in the standard repos
 .
