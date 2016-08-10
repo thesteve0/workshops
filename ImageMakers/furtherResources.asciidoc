@@ -1,0 +1,15 @@
+== Further Resources
+
+=== Image Creation
+
+http://www.projectatomic.io/docs/docker-building-images/
+http://www.projectatomic.io/docs/docker-image-author-guidance/
+https://docs.openshift.org/latest/creating_images/guidelines.html
+
+==== Videos
+https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqcZijDUM2jGxXxlMq98HPiq
+
+=== Source To Image
+
+=== For SDN
+https://github.com/rajatchopra/openshift-networking-requirements/blob/master/README.md
