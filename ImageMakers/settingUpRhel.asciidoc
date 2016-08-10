@@ -1,0 +1,42 @@
+== Setting up your RHEL base VM
+
+While being primed is great, there is also even more value in getting to a certified container.
+Red Hat now provides Red Hat Enterprise Linux (RHEL) for free for development purposes. The
+steps to getting the VM setup are:
+
+1. Register at http://developer.redhat.com
+2. Download the RHEL ISO from https://developers.redhat.com/downloads/
+3. Take your favorite VM technology and make a RHEL VM (I used VirtualBox)
+4. Log in as root and do the following commands:
+
+[source, bash]
+-----
+$ subscription-manager register # use your username and password from above
+$ subscription-manager attach # should just work
+$ yum update
+$ reboot
+$ subscription-manager repos --enable=rhel-7-server-extras-rpms
+$ subscription-manager repos --enable=rhel-7-server-optional-rpms
+# Do all the steps neccessary to install the guest additions on VirtualBox
+# Useful for when we try to build our docker image
+-----
+
+==== Installing Docker
+Right now there are two version of Docker you can install into RHEL.
+https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/#getting_docker_in_rhel_7
+
+Until OpenShift 3.3 comes out please use 1.9:
+
+[source, bash]
+----
+
+$ yum install docker --exclude docker-1.10* --exclude docker-selinux-1.10*
+
+----
+
+==== Simple Test Build
+
+Now you have a machine that is ready to build Docker images based on RHEL. These instructions are
+for a very minimal RHEL install. You will probably find that you need other tools installed on the
+machine as well. Go ahead and add any other tools you want. Don't forget about https://fedoraproject.org/wiki/EPEL[EPEL]
+for packages not found in the standard repos.
