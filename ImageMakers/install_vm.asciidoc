@@ -17,6 +17,10 @@ WARNING: You must do this *BEFORE* the class - we will not have time to do this 
 
 VirtualBox is a requirement. I know some of you have parallels and vmware and other virtualization tech but I only built the image for VirtualBox. My reasoning for doing this is that it is the only FOSS VM software out there. Sorry but that's the breaks.
 
+WARNING: If you are using the new Docker for Windows, it requires HyperV which prevents VirtualBox from seeing the VT-X extension. It is a real hassle to switch back and forth. Everytime you want to
+go to VirtualBox you basically need to "repair it" from applications. So turning on HyperV or VirtualBox will require at least one reboot. I found instructions on how do avoid the whole repair step
+in this post by http://www.hanselman.com/blog/SwitchEasilyBetweenVirtualBoxAndHyperVWithABCDEditBootEntryInWindows81.aspx[Scott Hanselman] and while I did not try this myself I trust him.
+
 === Account requirements
 
 WARNING: You must do this *BEFORE* the class - we will not have time to do this in class.
