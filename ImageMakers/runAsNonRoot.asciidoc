@@ -1,0 +1,64 @@
+== Running Your Images as a Non-Root User
+
+If you look at most of the images on Dockerhub they run as the root user - so if yours
+does as well you have a lot of company. Unfortunately this is a bad security practice.
+You don't run your desktop as a "root" user and especially not on your servers, so there
+is no reason you should do it on your containers. All those same reasons that warn against
+running as an account with admin priveliges still apply in Docker land.
+
+Running in OpenShift Container Platform, OpenShift Online, and OpenShift dedicated requires
+that your container be able to run as a random non-admin userid. For our class we are going
+to use a simple example.
+
+=== Making a CentOS Apache HTTPD Image
+
+We are going to start with a CentOS image and Apache HTTPD to the image. Since you have
+already built Docker images before I will just give you the GitHub repo. with my simple
+image:
+
+https://github.com/thesteve0/myDockerImages/tree/master/simple
+
+Here is the Dockerfile with the comments removed:
+
+[source, Dockerfile]
+-----
+FROM centos:centos7
+
+MAINTAINER Steve Pousty <thesteve0@redhat.com>
+
+RUN yum install -y --setopt=tsflags=nodocs httpd.x86_64 && yum clean all -y
+
+EXPOSE 80
+
+CMD /usr/sbin/apachectl -DFOREGROUND
+
+#docker run -p 80:80 6e3c25bdca9b
+-----
+
+(12:13:11 PM) bparees: TheSteve0: the nss stuff is only necessary in certain cases when you use certain apps/tools that expect to be able to look up the current uid in the /etc/passwd file.
+(12:13:20 PM) bparees: TheSteve0: ie they want "whoami" to return more than "1234"
+(12:13:47 PM) bparees: TheSteve0: so while it's highly recommended (And our image creator docs talk about it), you can probably get away w/o it.
+
+Jenkins Image does this with NSS wrapper example
+https://github.com/openshift/jenkins/blob/master/1/Dockerfile.rhel7
+OpenShift assigns a random UID
+when we start up jenkins it runs this script (along with others)
+https://github.com/openshift/jenkins/blob/master/1/contrib/s2i/run#L29-L31
+
+And this adds the random UID to the NSS passwords file so the app can find it there
+https://github.com/openshift/jenkins/blob/master/1/contrib/jenkins/jenkins-common.sh#L12-L29
+
+I can run like this to test
+ docker run -t -p 8080:8080 -u 1234 thesteve0/noroot
+
+ Tag and push to dockerhub and then run in openshift
+
+
+ TheSteve0 you can set the imagePullPolicy to AlwaysPull
+(3:49:04 PM) cewong: TheSteve0 in a specific pod
+(3:49:08 PM) TheSteve0: cewong - that makes sense
+(3:49:23 PM) cewong: TheSteve0 there's also an admission plugin that will force ALL pods to have that setting
+(3:49:33 PM) TheSteve0: cewong:  no need for that
+(3:49:48 PM) TheSteve0: cewong:  so change the setting and then change it back
+(3:49:55 PM) cewong: TheSteve0 yes
+NO automatic way to do this

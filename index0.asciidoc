@@ -15,7 +15,9 @@ free use as long you provide attribution.
 // They are overwhelmed by the end of the day and need to wrap it up in a nice way
 
 
-include::ImageMakers/install_vm.asciidoc[]
+include::UberConf/workshop_intro.asciidoc[]
+
+include::UberConf/install_vm.asciidoc[]
 
 include::common/intro_to_os.asciidoc[]
 
@@ -25,25 +27,21 @@ include::common/running_an_image.asciidoc[]
 
 include::common/health_checks.asciidoc[]
 
-include::ImageMakers/runAsNonRoot.asciidoc[]
-
-include::ImageMakers/workingWithStorage.asciidoc[]
-
-include::ImageMakers/S2I.asciidoc[]
-
-// todo REWRITE GIVEN NEW ORDER - For this class it may need to be different
-// altogether with some of the same early content but then a simple example 
+//todo REWRITE GIVEN NEW ORDER
 include::common/templates.asciidoc[]
 
-include::ImageMakers/otherThings.asciidoc[]
+//todo REWRITE GIVEN NEW ORDER
+include::common/adding_database.asciidoc[]
 
-include::ImageMakers/troubleshootingImages.asciidoc[]
+//todo REWRITE GIVEN NEW ORDER
+include::common/adding_code.asciidoc[]
 
-include::ImageMakers/settingUpRhel.ascidoc[]
-
+//todo REWRITE GIVEN NEW ORDER
+include::common/full_application.asciidoc[]
 
 // include::common/source_to_image.asciidoc[] need registry fix for this one
 
+//include::common/blue_green.asciidoc[]
 
 <<<
 

@@ -2,6 +2,8 @@
 
 === Image Creation
 
+https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
+
 http://www.projectatomic.io/docs/docker-building-images/
 http://www.projectatomic.io/docs/docker-image-author-guidance/
 https://docs.openshift.org/latest/creating_images/guidelines.html

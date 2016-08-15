@@ -34,6 +34,10 @@ $ yum install docker --exclude docker-1.10* --exclude docker-selinux-1.10*
 
 ----
 
+==== Add registry.access.redhat.com to the Docker Client
+
+TODO
+
 ==== Summary
 
 Now you have a machine that is ready to build Docker images based on RHEL. Any Docker image you build on this
@@ -41,7 +45,7 @@ box will get it's enablement from the underlying host OS. So now you can start y
 
 [source, bash]
 -----
-FROM rhel:7.2-released
+FROM rhel:7.2
 -----
 
 and it should just work.  Here is an example of a Docker build file that should work for you - https://github.com/sclorg/rhscl-dockerfiles/blob/master/rhel7.s2i-base/Dockerfile
