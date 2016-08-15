@@ -1,1 +1,1 @@
-== S2I and Templates
+== S2I  

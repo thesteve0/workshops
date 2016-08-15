@@ -35,6 +35,30 @@ CMD /usr/sbin/apachectl -DFOREGROUND
 #docker run -p 80:80 6e3c25bdca9b
 -----
 
+You should be able to run this no problem on your machine. If we push this to Dockerhub we
+can actually run this in the A1VM since the OpenShift cluster does not enforce most
+of the security policies.
+
+First we need to push the image to DockerHub
+
+[source, bash]
+----
+$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: thesteve0
+Password:
+Login Succeeded
+$ docker push thesteve0/noroot
+The push refers to a repository [docker.io/thesteve0/noroot]
+bf2614d4c931: Pushed
+e16f434c3b83: Pushed
+9cf2dcbec1b4: Pushed
+f59b7e59ceaa: Mounted from library/centos
+latest: digest: sha256:6c18fe786790203fb8b29a3e4b48deab385d35bec2cec5007e6d51cb9e6be710 size: 1156
+----
+
+Now with our command line we
+
 (12:13:11 PM) bparees: TheSteve0: the nss stuff is only necessary in certain cases when you use certain apps/tools that expect to be able to look up the current uid in the /etc/passwd file.
 (12:13:20 PM) bparees: TheSteve0: ie they want "whoami" to return more than "1234"
 (12:13:47 PM) bparees: TheSteve0: so while it's highly recommended (And our image creator docs talk about it), you can probably get away w/o it.

@@ -32,7 +32,8 @@ include::ImageMakers/workingWithStorage.asciidoc[]
 include::ImageMakers/S2I.asciidoc[]
 
 // todo REWRITE GIVEN NEW ORDER - For this class it may need to be different
-// altogether with some of the same early content but then a simple example 
+// altogether with some of the same early content but then a simple example
+ 
 include::common/templates.asciidoc[]
 
 include::ImageMakers/otherThings.asciidoc[]
