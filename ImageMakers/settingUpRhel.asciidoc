@@ -52,5 +52,6 @@ and it should just work.  Here is an example of a Docker build file that should 
 
 These instructions are for a very minimal RHEL install. You will probably find that you need other tools installed on the
 machine as well. Go ahead and add any other tools you want. Don't forget about https://fedoraproject.org/wiki/EPEL[EPEL]
-for packages not found in the standard repos
-.
+for packages not found in the standard repos.
+
+<<<

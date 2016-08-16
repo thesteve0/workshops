@@ -106,8 +106,11 @@ You will see that you are running your container as root.
 
 === Switching the User
 
-Our first task in getting this ready is making the image run as non-root. There are several things we need
-to do. Since we can't bind to port 80 as a non-root user we need to change the port for Apache HTTPD. We will
+Our first task in getting this ready is making the image run as non-root. Actually to run in OpenShift
+you need the image to be ok with running as a randomly assigned user. We are going modify our Docker
+image to be a random users. There are several things we need
+to do to get there
+. Since we can't bind to port 80 as a non-root user we need to change the port for Apache HTTPD. We will
 also need to change the user we run as. Finally then we will need to see what this breaks.
 
 Here is the Github repo with my new docker image:
@@ -156,7 +159,8 @@ $ oc new-app thesteve0/noroot
     Run 'oc status' to view your app.
 ----
 
-Voila, the root warning is gone.
+Voila, the root warning is gone. From my teams experience the biggest place we find problems
+with being non-root, or a random userid, is actually with file permissions
 
 === What if I need a user to be in the /etc/passwd table
 
@@ -164,7 +168,7 @@ Sometimes an application will look up the user in the password table which won't
 work given the way I have just shown you. For example you need a username and not just an id.
 To handle you can use NSS Wrappers to do the work in your image.
 
-I am not going to talk through it much here but we will look at some example docker images
+I am not going to talk through it much here but we will look at some example Docker images
 that take advantage of NSS wrappers.
 
 Jenkins Image does this with NSS wrapper example
@@ -181,15 +185,19 @@ As you iteratively work on your image you will probably push to Dockerhub often.
 OpenShift to pick up the new images you need to modify your DeploymentConfig to always
 pull new images on deployment.
 
-By default the DeploymentConfig has its _imagePullPolicy_ set to _Always_ if we use the tag latest (which
-  we are doing in this case). Here is some https://docs.openshift.org/latest/dev_guide/managing_images.html#image-pull-policy[documentation]
-  talking about imagePullPolicy.
+By default the DeploymentConfig has its _imagePullPolicy_ set to _AlwaysPull_ if we use the tag latest (which
+we are doing in this case). This means everytime we do a deploy we do a pull request to Dockerhub (or whatever
+registry we are using) but we may not pull any bits if there are no changes.
+Here is some https://docs.openshift.org/latest/dev_guide/managing_images.html#image-pull-policy[documentation].
 
- TheSteve0 you can set the imagePullPolicy to AlwaysPull
-(3:49:04 PM) cewong: TheSteve0 in a specific pod
-(3:49:08 PM) TheSteve0: cewong - that makes sense
-(3:49:23 PM) cewong: TheSteve0 there's also an admission plugin that will force ALL pods to have that setting
-(3:49:33 PM) TheSteve0: cewong:  no need for that
-(3:49:48 PM) TheSteve0: cewong:  so change the setting and then change it back
-(3:49:55 PM) cewong: TheSteve0 yes
-NO automatic way to do this
+=== Next steps
+
+And with that we have:
+
+1. Gotten our image to run as a random UUID
+2. Made our image log to stdout
+
+The final things we absolutely need to make it do is use volumes for changing content.
+So let's go to the next section and get going!
+
+<<<
