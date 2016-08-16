@@ -1,1 +1,80 @@
 == Working with Storage
+
+Since Docker containers are immutable, any content that you want to change over
+the life of the container should be put in external volumes. As a Docker author you
+probably already know this. In OpenShift this doesn't change and also requires nothing
+special to make it happen.
+
+In case you need a reminder here is the Docker https://docs.docker.com/engine/tutorials/dockervolumes/[documentation]
+on storage volumes and their use.
+
+=== Changing Our Image For Storage
+
+The changes to our HTTPD image are minimal. First I change the permissions on the
+HTML directory (I looked at httpd.conf to determine the directory). This way we can
+make changes to the directory while the container is running and the content can remain.
+
+Here is the Dockerfile that runs as a random UID and also uses volumes:
+
+https://github.com/thesteve0/myDockerImages/blob/master/simpleNRVol/Dockerfile
+
+I did three steps to enable the volumes:
+
+1. Changed the permissions on the /var/www/html
+2. Copied over a new HTML page so we could actually see the change
+3. Made that directory into a VOLUME.
+
+That's it to get it to work with OpenShift.
+
+=== Run the Image in OpenShift
+
+Let's go ahead and run this image in OpenShift.
+
+[source, bash]
+----
+
+ oc new-app thesteve0/nrvolume
+
+----
+
+Once this comes up, if I managed to update the image in time, we should see a new content at the base URL.
+If we don't see anything new or if we want to change the content, we can again go to the terminal for the pod.
+Once inside the terminal we can do the following:
+
+[source, bash]
+----
+$ cd /var/www/html
+$ ls
+$ #if it's empty we can touch index.html
+$ vi index.html
+----
+
+The CentOS base image includes VI so we can go ahead and edit the file. After editing and saving, when we reload the page we can see our changes.
+
+You may be wondering where did this file get saved. To explain that I need you to click on the
+Details tab again and look at the right side.
+
+image::images/imageMakers/storage.png[]
+
+In the top red box we can see that OpenShift has mounted a Volume for /var/www/html and
+in the second red box we can see that OpenShift has mapped that volume to an emptyDir.
+
+To understand more of this I will do a very high level discussion of Persistent Volumes and
+Persistent Volume Claims in OpenShift/Kubernetes. A more thorough discussion of this topic
+could easily take a whole day.
+
+=== Storage on OpenShift/Kubernetes
+
+OpenShift inherits most of it's storage capabilities and functionality from Kubernetes so I am
+going to have this part of the discussion using Kubernetes. When setting up a cluster, a system
+administrator can make different persistent volumes available to the cluster.
+
+##### talk about persistent volumes and then claims and how the claim type can impact what happens with your disk
+
+
+=== Moving on to Templates
+
+Making Persistent Volume claim usually happens in a template so let's move on to that topic. Again, like storage
+templates could take a whole day to cover so I am only going to give a brief introduction. A Docker image by itself
+will unlikely be enough if you want people to be successful with your product. As an image maker you are most definitely
+going to want to make a template for developers or system administrators to consume your Docker image. 

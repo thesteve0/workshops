@@ -8,6 +8,18 @@ http://www.projectatomic.io/docs/docker-building-images/
 http://www.projectatomic.io/docs/docker-image-author-guidance/
 https://docs.openshift.org/latest/creating_images/guidelines.html
 
+
+Nice overview posts by one of my teamates:
+http://blog.dscpl.com.au/p/using-python-with-docker.html
+
+And a nice post of his about the random UID issue
+http://blog.dscpl.com.au/2015/12/random-user-ids-when-running-docker.html
+
+And his journey in getting Jypter to work
+http://blog.dscpl.com.au/2016/01/roundup-of-docker-issues-when-hosting.html
+
+
+
 ==== Videos
 https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqcZijDUM2jGxXxlMq98HPiq
 

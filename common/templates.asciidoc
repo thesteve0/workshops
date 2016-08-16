@@ -2,7 +2,7 @@
 
 As I explained before, Kubernetes and OpenShift use a declarative model of the world - you tell the cluster what the truth is and the cluster then goes about making it so. OpenShift let's you declare the truth in a file, either YAML or JSON syntax, whichever you prefer. In this section we are going to VERY brielfy look at some of these files and leave with pointers to more information if you want to dive in more.
 
-The OpenShift Master exposes a http://swagger.io/[Swagger] API if you want to really dig in and see what is exposed. You
+The OpenShift Master exposes a http://swagger.io/[Swagger] API if you want to really dig in and see what is exposed. You can hit this URL
 https://10.2.2.2:8443/swaggerapi/api/v1
 
 You can also look at any of the YAML for any of the resources in your names space by clicking on the top right drop down and selecting "Edit". This will let you live edit the YAML for any of your resources and apply the changes immediately. Here is an example showing you how to open the YAML for your pod:

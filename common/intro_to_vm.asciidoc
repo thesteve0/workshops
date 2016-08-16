@@ -1,6 +1,6 @@
 == Introduction to the OpenShift All-In-One VM
 
-Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM and command line tools. 
+Before we get started, it is assumed that you have already installed the OpenShift All-In-One VM and command line tools.
 
 The all-in-one VM (A1VM) is intended for a developer or sysadmin to have a quick and easy way to use OpenShift (which also is a great way to use Kubernetes). The focus of the A1VM is:
 
@@ -9,7 +9,26 @@ The all-in-one VM (A1VM) is intended for a developer or sysadmin to have a quick
 3. Give developers a means to carry out rapid development without needing an external server
 4. Give the OpenShift evangelists an easy way to run workshops - like this one
 
-WARNING: We wanted to allow developers to use any Docker image they want, which required us turning off some security in OpenShift. By default, OpenShift will not allow a container to run as root or even a non-random container assigned userid. Most Docker images in Dockerhub do not follow this best practice and instead run as root. Further multiplying this error, a large majority of Dockerhub images are not patched for well known vulnerabilities. Therefore, please use images from Dockerhub with caution. We think some of the risk is mitigated because you are running OpenShift in a VM, but still - be careful which Docker images you run.
+WARNING: We wanted to allow developers to use any Docker image they want, which required us turning off some security in OpenShift.
+By default, OpenShift will not allow a container to run as root or even a non-random container assigned userid. Most Docker images in
+Dockerhub do not follow this best practice and instead run as root. Further multiplying this error, a large majority of Dockerhub images
+are not patched for well known vulnerabilities. Therefore, please use images from Dockerhub with caution. We think some of the risk is
+mitigated because you are running OpenShift in a VM, but still - be careful which Docker images you run.
+
+[TIP]
+====
+If you want to run the VM with same permissions as in the Enterprise or Online
+products you can do the following command inside the Vagrant machine:
+
+[source, bash]
+----
+$ oc login #username admin #password any password you want
+$ oc adm policy remove-scc-from-group anyuid system:authenticated
+----
+This commands removes the ability to for any OpenShift UID from running as system:authenticated and resets it to the default which is only allow that permission for random UID.
+
+Your VM now behaves like Online or Enterprise in terms of not letting Docker images run as root user.
+====
 
 === The command line
 And with that we begin the journey. Our first step will be to login to the VM both from the command line (cli) and the web console (console). Open a terminal and type in:
