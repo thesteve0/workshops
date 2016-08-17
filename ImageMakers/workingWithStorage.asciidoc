@@ -57,7 +57,7 @@ image::images/imageMakers/storage.png[]
 In the top red box we can see that OpenShift has mounted a Volume for /var/www/html and
 in the second red box we can see that OpenShift has mapped that volume to an emptyDir.
 
-Watch what happens now when I vagrant SSH into the machine and kill the pod running the container. 
+Watch what happens now when I vagrant SSH into the machine and kill the pod running the container.
 
 To understand more of this I will do a very high level discussion of Volumes, Persistent Volumes, and
 Persistent Volume Claims in OpenShift/Kubernetes. A more thorough discussion of this topic
@@ -124,3 +124,5 @@ Making Persistent Volume claim usually happens in a template so let's move on to
 templates could take a whole day to cover so I am only going to give a brief introduction. A Docker image by itself
 will unlikely be enough if you want people to be successful with your product. As an image maker you are most definitely
 going to want to make a template for developers or system administrators to consume your Docker image.
+
+<<<

@@ -1,11 +1,14 @@
 == Other Things You Should Know
+
+=== Environment Variables
+
 Let's touch briefly on some of the ways you can allow users to alter settings (such as passwords or memory settings) in your Docker images. The primary way to do this is by using environment variables in your docker image for settings. Once you put these into your Docker image the user can set these in OpenShift using OpenShift https://docs.openshift.com/enterprise/3.2/dev_guide/environment_variables.html[environment variables], https://docs.openshift.com/enterprise/3.2/dev_guide/configmaps.html[ConfigMaps], or https://docs.openshift.com/enterprise/3.2/dev_guide/secrets.html[Secrets]. All three of these things are better means to handle setting information in your app that you might want to change at runtime.
 
 Let's look at the Red Hat Software Collections Library's PostgreSQL docker image to see some examples of how to work with environment variables in your Docker image.
 
 https://github.com/sclorg/postgresql-container/tree/master/9.5/root/usr/share/container-scripts/postgresql
 
-Once you set up your image to accept these, the end user can use OpenShift environment variables, secrets, or configmaps to set these variables. Again, you may also want to put them into a template with sensible defaults but allow the user to overide the auto-generated or default values.
+Once you set up your image to accept these, the end user can use OpenShift environment variables, secrets, or configmaps to set these variables. Again, you may also want to put them into a template with sensible defaults but allow the user to override the auto-generated or default values.
 
 === You Need to Brush Up On Shell Scripting
 
