@@ -1,1 +1,16 @@
 == Troubleshooting images
+
+The `oc debug` command makes it easy to obtain shell access in a misbehaving pod. It clones the exact environment of the running deployment configuration, replication controller, or pod, but replaces the run command with a shell.
+
+So you would use it like:
+
+[source, bash]
+----
+$ oc debug dc/MyDeploymentConfig
+
+or
+
+$ oc debug mypod
+----
+
+This will deploy or run the pod, but instead of doing the run command at the end of the Dockerfile, it will just give you a bash prompt so you can poke around and see how things are set up.

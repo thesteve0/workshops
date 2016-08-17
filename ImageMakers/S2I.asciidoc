@@ -1,1 +1,12 @@
-== S2I  
+== Source To Image
+If your users will need to combine your image with some type of "source" to create a new image then you are going to want to look at the https://github.com/openshift/source-to-image[Source to Image](S2I) project. It is a separate project outside of OpenShift, but the OpenShift infrastructure knows how to take advantage of it.
+
+S2I is typically leveraged by language runtimes, such as Python with Gunicorn or Tomcat. We could certainly do the scripts with our HTTPD image and it would allow us to keep our HTML files out of the Docker image and just combine the image and the files at build time into a new Docker image.
+
+I will explain in class and then I will go through the wildfly s2i image. I chose this image particularly for the APM attendees in the class since Java is a good use case for them.
+
+https://github.com/openshift-s2i/s2i-wildfly/tree/master/10.0
+
+If we wanted a simpler example we could look at the S2I for PHP
+
+https://github.com/sclorg/s2i-php-container/blob/master/5.6/s2i/bin/assemble

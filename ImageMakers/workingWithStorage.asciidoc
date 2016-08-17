@@ -18,11 +18,11 @@ Here is the Dockerfile that runs as a random UID and also uses volumes:
 
 https://github.com/thesteve0/myDockerImages/blob/master/simpleNRVol/Dockerfile
 
-I did three steps to enable the volumes:
+I did two steps to enable the volume:
 
-1. Changed the permissions on the /var/www/html
-2. Copied over a new HTML page so we could actually see the change
-3. Made that directory into a VOLUME.
+1. Made the content directory into a VOLUME.
+2. Changed the permissions on /var/www/html
+
 
 That's it to get it to work with OpenShift.
 
@@ -37,19 +37,17 @@ Let's go ahead and run this image in OpenShift.
 
 ----
 
-Once this comes up, if I managed to update the image in time, we should see a new content at the base URL.
-If we don't see anything new or if we want to change the content, we can again go to the terminal for the pod.
+Once this comes up we don't see any change to the content but we can again go to the terminal for the pod.
 Once inside the terminal we can do the following:
 
 [source, bash]
 ----
 $ cd /var/www/html
 $ ls
-$ #if it's empty we can touch index.html
 $ vi index.html
 ----
 
-The CentOS base image includes VI so we can go ahead and edit the file. After editing and saving, when we reload the page we can see our changes.
+The CentOS base image includes Vi so we can go ahead and edit the file. After editing and saving, when we reload the page we can see our changes.
 
 You may be wondering where did this file get saved. To explain that I need you to click on the
 Details tab again and look at the right side.
@@ -59,22 +57,70 @@ image::images/imageMakers/storage.png[]
 In the top red box we can see that OpenShift has mounted a Volume for /var/www/html and
 in the second red box we can see that OpenShift has mapped that volume to an emptyDir.
 
-To understand more of this I will do a very high level discussion of Persistent Volumes and
+Watch what happens now when I vagrant SSH into the machine and kill the pod running the container. 
+
+To understand more of this I will do a very high level discussion of Volumes, Persistent Volumes, and
 Persistent Volume Claims in OpenShift/Kubernetes. A more thorough discussion of this topic
 could easily take a whole day.
 
 === Storage on OpenShift/Kubernetes
 
 OpenShift inherits most of it's storage capabilities and functionality from Kubernetes so I am
-going to have this part of the discussion using Kubernetes. When setting up a cluster, a system
-administrator can make different persistent volumes available to the cluster.
+going to have this part of the discussion using Kubernetes.
 
-##### talk about persistent volumes and then claims and how the claim type can impact what happens with your disk
+There are different ways that a Kubernetes cluster can handle a https://docs.openshift.com/enterprise/3.2/dev_guide/volumes.html[volume claim] by a Docker image. Depending on how the cluster is configured there can be up to 5 different types of volume mounts (look at the https://docs.openshift.com/enterprise/3.2/dev_guide/volumes.html#adding-volumes[options] under the -t flag). The settings for how volumes will be handled is typically on the DeploymentConfig, which is responsible for determining how pods will be deployed.
 
+The easiest volume, if enabled by the cluster administrator, is an emptyDir. This setting means the volume will be created as an empty directory on the node hosting the pod. The volume is ephemeral and only lasts as long as the pod reamins on the node. If they pod is removed from the node all the data will be lost, though the data should be safe from a http://kubernetes.io/docs/user-guide/volumes/#emptydir[container crash]
+
+On the other hand, When setting up a cluster, a system administrator can make persistent volumes available to the cluster.
+
+https://docs.openshift.com/enterprise/3.2/architecture/additional_concepts/storage.html#architecture-additional-concepts-storage[Persistent Volumes] can be made from several different types of storage such as Ceph, iSCSI, EBS, or in the case of our VM, NFS. Once these are "attached" to the cluster, space can be requested from them by any of the pods.
+
+If you want to see all the Persistent Volumes (pv) on the A1VM do the following commands:
+
+[source, bash]
+----
+$ oc login -u admin
+Authentication required for https://10.2.2.2:8443 (openshift)
+Username: admin
+Password:
+Login successful.
+$ oc get pv
+NAME      CAPACITY   ACCESSMODES   STATUS      CLAIM     REASON    AGE
+pv01      10Gi       RWO,RWX       Available                       7d
+pv02      10Gi       RWO,RWX       Available                       7d
+pv03      10Gi       RWO,RWX       Available                       7d
+pv04      10Gi       RWO,RWX       Available                       7d
+pv05      10Gi       RWO,RWX       Available                       7d
+pv06      10Gi       RWO,RWX       Available                       7d
+pv07      10Gi       RWO,RWX       Available                       7d
+pv08      10Gi       RWO,RWX       Available                       7d
+pv09      10Gi       RWO,RWX       Available                       7d
+pv10      10Gi       RWO,RWX       Available                       7d
+
+$ oc describe pv pv01
+Name:		pv01
+Labels:		<none>
+Status:		Available
+Claim:
+Reclaim Policy:	Recycle
+Access Modes:	RWO,RWX
+Capacity:	10Gi
+Message:
+Source:
+    Type:	NFS (an NFS mount that lasts the lifetime of a pod)
+    Server:	localhost
+    Path:	/nfsvolumes/pv01
+    ReadOnly:	false
+----
+
+Developer can then make claims into the PVs by making a https://docs.openshift.com/enterprise/3.2/architecture/additional_concepts/storage.html#persistent-volume-claims[persistent volume claim] (PVC). There is https://docs.openshift.com/enterprise/3.2/dev_guide/persistent_volumes.html[developer documentation] on how to use PVCs with Volumes in Docker images.
+
+In the case when the filesystem supports proper permissioning, like NFS, multiple pods can mount the same claim. this would be a good pattern to use with our HTTPD pod as we want all the pods to serve the same content. Here is a https://blog.openshift.com/experimenting-with-persistent-volumes/[blog post] by one of my coworkers which discusses using PVs and PVCs with an NGNIX docker image.
 
 === Moving on to Templates
 
 Making Persistent Volume claim usually happens in a template so let's move on to that topic. Again, like storage
 templates could take a whole day to cover so I am only going to give a brief introduction. A Docker image by itself
 will unlikely be enough if you want people to be successful with your product. As an image maker you are most definitely
-going to want to make a template for developers or system administrators to consume your Docker image. 
+going to want to make a template for developers or system administrators to consume your Docker image.

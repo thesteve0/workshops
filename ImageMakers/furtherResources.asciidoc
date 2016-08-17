@@ -25,5 +25,9 @@ https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqcZijDUM2jGxXxlMq98HPiq
 
 === Source To Image
 
+https://github.com/openshift/source-to-image
+https://www.youtube.com/watch?v=flI6zx9wH6M
+https://blog.openshift.com/create-s2i-builder-image/
+
 === For SDN
 https://github.com/rajatchopra/openshift-networking-requirements/blob/master/README.md
