@@ -42,7 +42,7 @@ include::ImageMakers/S2I.asciidoc[]
 
 include::ImageMakers/troubleshootingImages.asciidoc[]
 
-include::ImageMakers/settingUpRhel.ascidoc[]
+include::ImageMakers/settingUpRhel.asciidoc[]
 
 
 // include::common/source_to_image.asciidoc[] need registry fix for this one

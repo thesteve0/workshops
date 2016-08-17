@@ -14,3 +14,5 @@ $ oc debug mypod
 ----
 
 This will deploy or run the pod, but instead of doing the run command at the end of the Dockerfile, it will just give you a bash prompt so you can poke around and see how things are set up.
+
+<<<

@@ -13,7 +13,27 @@ I hope it comes as no surprise to anyone that the simple Docker image we built f
 
 For example, here is the repository for CrunchyDB Docker containers, production ready PostgreSQL containers. They are probably our most advanced partner in making containers to run on OpenShift and Kubernetes.
 
+https://github.com/CrunchyData/crunchy-containers
+
+So we start with this file, which is the Dockerfile for RHEL 7:
+
+https://github.com/CrunchyData/crunchy-containers/blob/master/rhel7/9.5/Dockerfile.postgres.rhel7
+
+Which then calls this file:
+
+https://github.com/CrunchyData/crunchy-containers/blob/master/bin/postgres/start.sh
+
+Which then calls this file - which allows the user to set shared buffers and such:
+
+https://github.com/CrunchyData/crunchy-containers/blob/master/bin/postgres/start-pg-wrapper.sh
+
+which has lines that do sed on a temporary postgresql.conf
+
+https://github.com/CrunchyData/crunchy-containers/blob/master/bin/postgres/start-pg-wrapper.sh#L94
+
+Here is the postgresql.conf.template it is using
+
+https://github.com/CrunchyData/crunchy-containers/blob/master/conf/postgres/postgresql.conf.template#L114
 
 
-ConfigMaps and Env Variables
-OC debug
+<<<

@@ -10,3 +10,5 @@ https://github.com/openshift-s2i/s2i-wildfly/tree/master/10.0
 If we wanted a simpler example we could look at the S2I for PHP
 
 https://github.com/sclorg/s2i-php-container/blob/master/5.6/s2i/bin/assemble
+
+<<<
