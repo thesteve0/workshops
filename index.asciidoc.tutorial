@@ -1,0 +1,81 @@
+= https://uberconf.com/conference/denver/2016/07/session?id=35989[Application development with Docker, Kubernetes, and OpenShift]
+Steve Pousty
+:source-highlighter: coderay
+
+== Slides Used in Class
+Both http://bit.ly/v3workshop[the slides] and these workshop notes are released
+under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing
+free use as long you provide attribution.
+
+//WARNING REWRITE THE MASTER CONTENT BEFORE TAKING THIS ON
+
+//REWRITE THIS
+include::UberConf/workshop_intro.asciidoc[]
+//REWRITE THIS
+include::UberConf/install_vm.asciidoc[]
+
+include::common/intro_to_os.asciidoc[]
+
+include::common/intro_to_vm.asciidoc[]
+
+include::common/running_an_image.asciidoc[]
+
+include::common/templates.asciidoc[]
+
+include::common/adding_database.asciidoc[]
+
+//todo REWRITE TO JUST BE ADDING ALL THE CODE - SO COMBINE THE TWO CHAPTERS
+include::common/adding_code.asciidoc[]
+
+//todo REWRITE GIVEN NEW ORDER
+include::common/full_application.asciidoc[]
+
+//todo write this
+include::common/pg_metrics.asciidoc[]
+
+//todo write this
+include::common/pg_backup.asciidoc[]
+
+//todo maybe write this
+//need Jeff or Paul to decide which to show
+// PGBouncer or CrunchyWatch
+include::common
+
+<<<
+
+== Appendix: Here are some basic commands I found useful
+
+How to build the documentation
+
+[source, bash]
+----
+
+asciidoctor -S unsafe ~/git/workshops/index.asciidoc
+
+----
+
+How to delete the application pieces but not the DB pieces
+[source, bash]
+----
+
+oc delete is,dc,svc,bc v3simple-spatial
+
+----
+
+How to do a web request with cURL
+
+[source, bash]
+----
+
+curl 'curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''
+' -d ''
+
+----
+
+How to insert a value into the table
+[source, sql]
+----
+
+Insert into parkpoints (name, the_geom) VALUES ('ASteve', ST_GeomFromText('POINT(-85.7302 37.5332)', 4326));
+
+----
