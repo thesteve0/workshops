@@ -1,7 +1,20 @@
 == Installing the Vagrant Box
 
-Let's go ahead and install the Vagrant box file and get everything up and running.
+=== Preface
 
+We build this all-in-one from a specific Github repository.
+
+https://github.com/openshift-evangelists/vagrant-origin
+
+You can always build an all-in-one using the scripts and instructions in that repository. Those instructions will
+allow you to build from any origin repository or branch. This is a great way to play deeply with the
+source code or try out the head of the repository without waiting for us to do a build.
+You can also turn on or off different features depending on what you do in the configuration files.
+One example that the OpenShift Evangelists do with those scripts is to create fully loaded
+VMs for workshops with all the Docker images pre-downloaded.
+
+
+With that said, let's go ahead and install the Vagrant box file and get everything up and running.
 
 === Hardware Requirements
 1. 10 gigs of disk to start but may need up to 30
@@ -10,82 +23,46 @@ Let's go ahead and install the Vagrant box file and get everything up and runnin
 
 === Software Requirements
 
-WARNING: You must do this *BEFORE* the class - we will not have time to do this in class.
+WARNING: You must do this *BEFORE* the install.
 
-1. Install https://www.virtualbox.org/wiki/Downloads[VirtualBox]
-2. Install https://www.vagrantup.com/downloads.html[Vagrant]
+1. Install https://www.virtualbox.org/wiki/Download_Old_Builds_5_0[VirtualBox]. Vagrant doesn't work with the 5.1 versions
+2. Install https://releases.hashicorp.com/vagrant/1.8.4/[Vagrant]. There is a nasty SSH bug in the latest so we need to go back one
 
-VirtualBox is a requirement. I know some of you have parallels and vmware and other virtualization tech but I only built the image for VirtualBox. My reasoning for doing this is that it is the only FOSS VM software out there. Sorry but that's the breaks.
+VirtualBox is a requirement. We know some of you have parallels and vmware and other virtualization tech but we only built the image for VirtualBox.
+Our reasoning for doing this is that it is the only FOSS VM software out there. Sorry but that's the breaks.
+
+WARNING: If you are using the new Docker for Windows, it requires HyperV which prevents VirtualBox from seeing the VT-X extension.
+It is a real hassle to switch back and forth. Every time you want to go to VirtualBox you basically need to "repair it" from applications.
+So turning on HyperV or VirtualBox will require at least one reboot. I found instructions on how do avoid the whole repair step
+in this post by http://www.hanselman.com/blog/SwitchEasilyBetweenVirtualBoxAndHyperVWithABCDEditBootEntryInWindows81.aspx[Scott Hanselman] and while I did not try this myself I trust him.
 
 === Account requirements
 
-WARNING: You must do this *BEFORE* the class - we will not have time to do this in class.
+WARNING: You must do this *BEFORE* the exercises.
 
 1. https://github.com/join?source=header-home[GitHub account], if you don't have one
 
-
-=== Github Repos to bring to your machine
-
-These repos may not be finished or even available until right before the class, so we will be doing this in class.
-
-Put these in a directory titled _os_workshop_ (not required but then it is on you to translate to your directory name in the rest of the instructions)
-
-*FORK* The sample code https://github.com/thesteve0/v3simple-spatial and then clone to your machine. If you just clone without the fork you will not be able to do any of the code change exercises.
-
-Clone the Crunchy DB code https://github.com/CrunchyData/crunchy-containers (optionally you can fork and then clone if you think you are going to want to make your own changes).
-
-=== Getting the Vagrant box on your local machine
-
-In the _os_workshop_ directory make a directory titled _vagrant_ and change into it.
-
----
 ==== Using the box on Atlas
 
-If you are doing this at home (which I hope you did before the class) do the following commands
-
+On your machine make a directory called _os_workshop_. In that directory do the following commands:
 
 [source, bash]
 ----
-C:\_os_workshop\vagrant> vagrant init thesteve0/uberconf-openshift-origin
-C:\_os_workshop\vagrant> vagrant up --provider=virtualbox
+C:\_os_workshop> vagrant init openshift/origin-all-in-one
+C:\_os_workshop> vagrant up --provider=virtualbox
 
 ----
 
-There is a 4.6 Gig file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up.
+There is a 2.53 Gig file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up.
 
 ---
 
-Go ahead and download the OpenShift client tools for your laptop OS. There will be a single binary in the archive - for convenience you should put it somewhere in your path. But it is also fine to place it somewhere else, you will just need to prefix you calls with the path to binary.
+Go ahead and download the OpenShift client tools for your laptop OS. There will be a single binary in the archive - for convenience you
+should put it somewhere in your path. But it is also fine to place it somewhere else, you will just need to prefix you calls with the path to binary.
 
-Mac:
-https://github.com/openshift/origin/releases/download/v1.3.0-alpha.2/openshift-origin-client-tools-v1.3.0-alpha.2-983578e-mac.zip
+They will always be on the Origin latest release page
 
-Windows:
-https://github.com/openshift/origin/releases/download/v1.3.0-alpha.2/openshift-origin-client-tools-v1.3.0-alpha.2-983578e-windows.zip
-
-Linux:
-https://github.com/openshift/origin/releases/download/v1.3.0-alpha.2/openshift-origin-client-tools-v1.3.0-alpha.2-983578e-linux-64bit.tar.gz
-
-==== Manually copying the box off of a USB drive
-
-If you are doing this in the class we are going to manually bring the box to your machine.
-
-WARNING: You need to have access to your USB drive to choose this method to bring up your Vagrant box
-
-Please try to come 15 minutes early to class so we can try to do the copying and installing before the class starts.
-
-Copy the _Vagrantfile_ and  _uberconf-openshift-origin.box_ file from the USB stick into the _vagrant_ directory created above.
-
-Then in that directory do the following commands:
-
-[source, bash]
-----
-
-C:\_os_workshop\vagrant> vagrant box add --name uberconf-origin <sd card>\uberconf-openshift-origin.box
-C:\_os_workshop\vagrant> vagrant init uberconf-origin
-C:\_os_workshop\vagrant> vagrant up --provider=virtualbox
-
-----
+https://github.com/openshift/origin/releases
 
 ---
 ==== Final step
@@ -113,7 +90,7 @@ When "vagrant up" is done you should see a message that ends with:
 ==> default: $ oc login https://10.2.2.2:8443
 ----
 
-If this doesn't happen raise your hand or, if you are a good student and did this at home, email me.  If you see this then you have installed everything properly.
+ If you see this then you have installed everything properly.
 
 I know some of you are going to be curious and are going to start playing with this VM. That's OK!
 
@@ -122,7 +99,6 @@ Right before class (or if you break it) you just need to do the following steps:
 [source, bash]
 ----
 C:\_os_workshop\vagrant>vagrant destroy --force
-C:\_os_workshop\vagrant>rm -rf .vagrant #basically delete the .vagrant dir - I do it bc I am superstitious
 C:\_os_workshop\vagrant>vagrant up --provider=virtualbox
 ----
 

@@ -1,0 +1,24 @@
+== Application development with Docker, Kubernetes, and OpenShift
+
+=== Welcome
+
+Greetings and welcome to tutorial for using the all-in-one VM  (A1VM). By the time you have finished this tutorial
+you will have gotten your hands nice and dirty playing with OpenShift. Our overall goals for this document is:
+
+1. Introduce you to running applications in containers
+2. Give you enough information to launch into learning more OpenShift
+
+=== FYI
+
+* You can keep using this VM to play with
+    1. Docker
+    2. Kubernetes
+    3. OpenShift
+    4. PostgreSQL with some advanced features
+* This VM is not for production use and is community supported. You can go to the following places for more help
+    1. StackOverflow and tag with OpenShift
+    2. https://groups.google.com/forum/#!topic/openshift[The Google Group ]
+    3. The #openshift or #openshift-dev channels on freenode IRC  
+
+
+<<<

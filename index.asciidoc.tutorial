@@ -1,18 +1,16 @@
 = https://uberconf.com/conference/denver/2016/07/session?id=35989[Application development with Docker, Kubernetes, and OpenShift]
-Steve Pousty
+OpenShift Evangelists
 :source-highlighter: coderay
 
 == Slides Used in Class
-Both http://bit.ly/v3workshop[the slides] and these workshop notes are released
+http://bit.ly/v3workshop[Slides] we usually and these workshop notes are released
 under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allowing
 free use as long you provide attribution.
 
-//WARNING REWRITE THE MASTER CONTENT BEFORE TAKING THIS ON
-
 //REWRITE THIS
-include::UberConf/workshop_intro.asciidoc[]
+include::a1vm/tutorial_intro.asciidoc[]
 //REWRITE THIS
-include::UberConf/install_vm.asciidoc[]
+include::a1vm/install_vm.asciidoc[]
 
 include::common/intro_to_os.asciidoc[]
 
@@ -30,16 +28,6 @@ include::common/adding_code.asciidoc[]
 //todo REWRITE GIVEN NEW ORDER
 include::common/full_application.asciidoc[]
 
-//todo write this
-include::common/pg_metrics.asciidoc[]
-
-//todo write this
-include::common/pg_backup.asciidoc[]
-
-//todo maybe write this
-//need Jeff or Paul to decide which to show
-// PGBouncer or CrunchyWatch
-include::common
 
 <<<
 
@@ -50,7 +38,7 @@ How to build the documentation
 [source, bash]
 ----
 
-asciidoctor -S unsafe ~/git/workshops/index.asciidoc
+asciidoctor-pdf -S unsafe ~/git/workshops/index.asciidoc -o ~/git/workshops/tutorial.pdf
 
 ----
 
