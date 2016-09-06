@@ -1,0 +1,49 @@
+== Postgresql Metrics
+
+The postgres metrics are collected by the crunchy-collect container.  
+The collect container is added into the master database pod.  The
+collect container collects 30+ metrics and sends them to
+the Prometheus time series data store.
+
+Metrics can be queried within the Grafana web application.
+
+=== Components
+
+The tutorial startup script creates the components required
+for metrics collection and viewing including:
+ * prometheus (pod and service)
+ * prometheus push gateway (pod and service)
+ * grafana (pod, service, and route)
+ * crunchy-collect container (added into the pgmaster pod) 
+
+=== Accessing the App
+
+You can access grafana web application by browsing the following URL:
+....
+http://grafana-openshift.router.default.sv.cluster.local/login
+....
+
+The default admininstrative user ID is *admin*.  The
+password is *admin*.
+
+=== Creating a Datasource
+
+In the upper left-side of the application, click on the dropdown
+and select the Data Sources button to add a new data source.
+
+Click on the Add Data Source button on the next screen.
+
+Select *Prometheus* for the data source Type, enter a name of *crunchy*
+for the Name field, enter *http://crunchy-prometheus:9090* for the URL field
+and click the Add button.  You should get a green success message
+if all is well at this point.
+
+In the upper left-side of the application, click on the dropdown
+and select the Dashboard->New button to add a new dashboard.
+
+On the next screen, click on the small green tab button in the upper left
+of the screen, select Add Panel->Graph to add a graph.  On the graph,
+select the *crunchy* data source, then click on the Metric Lookup
+field to see the available metrics being collected.  Select a metric
+and it should display on the graph.
+

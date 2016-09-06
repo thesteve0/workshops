@@ -1,0 +1,40 @@
+== pgadmin4 
+
+The pgadmin4 web application allows you to view a database
+and execute queries in a web user interface.  
+
+
+=== Starting the container
+The pgadmin4 service, pod, and route are created as part of the 
+tutorial startup script.
+
+=== Accessing the App
+
+You can access pgadmin4 by browsing the following URL:
+....
+http://pgadmin4.openshift.svc.cluster.local:5050
+....
+
+The default admininstrative user ID is *admin@admin.org*.  The
+password is *password*.
+
+=== Creating a Server
+
+In the left-side tree, right-click then select the
+Create->Server button from the menu.
+
+Enter a name for the database server you wish to connect to such
+as *pgmaster*.  On the Connection tab, enter the service name *pgmaster* within
+the Host Name/Address text field, and enter *postgres* in the User
+Name field, and *password* in the Password field, then select the
+Save button.
+
+You should now see the *pgmaster* value within the tree on the left
+side and a Dashboard showing various metrics collected by pgadmin4.
+
+Expand the tree under the server name and click on the *postgres* database.
+Next, click on the Tools menu item and select the Query Tool button to
+expose the SQL query tool screen.  From here, you can enter
+SQL commands and execute them on the server.  The button with the lighting
+bolt on it will execute the SQL command.
+
