@@ -8,11 +8,12 @@ under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allo
 free use as long you provide attribution.
 
 //WARNING REWRITE THE MASTER CONTENT BEFORE TAKING THIS ON
+//https://github.com/CrunchyData/crunchy-containers/tree/master/examples/openshift/tutorial
 
 //REWRITE THIS
-include::UberConf/workshop_intro.asciidoc[]
+include::postgresql/workshop_intro.asciidoc[]
 //REWRITE THIS
-include::UberConf/install_vm.asciidoc[]
+include::postgresql/install_vm.asciidoc[]
 
 include::common/intro_to_os.asciidoc[]
 
@@ -31,15 +32,17 @@ include::common/adding_code.asciidoc[]
 include::common/full_application.asciidoc[]
 
 //todo write this
-include::common/pg_metrics.asciidoc[]
+include::postgresql/pg_admin.asciidoc[]
 
 //todo write this
-include::common/pg_backup.asciidoc[]
+include::postgresql/pg_metrics.asciidoc[]
 
-//todo maybe write this
-//need Jeff or Paul to decide which to show
-// PGBouncer or CrunchyWatch
-include::common
+//todo write this
+include::postgresql/pg_badger.asciidoc[]
+
+//todo maybe write this - talk about other Crunchy Stuff Jeff has written but we
+//didn't show
+include::postgresql/other_functionality.asciidoc[]
 
 <<<
 
