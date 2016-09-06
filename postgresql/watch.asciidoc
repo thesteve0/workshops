@@ -1,0 +1,26 @@
+== crunchy-watch
+
+The crunchy-watch container does a health check on a Postgres
+master container and will trigger a failover onto a replica
+container if the master can not be reached.
+
+As part of the failover sequence, the replica chosen as the new
+master will have its Openshift labels updated to become the 
+new master.
+
+=== Starting the container
+The watch pod is  created as part of the tutorial startup script.
+
+=== Accessing the Watch Container
+
+You can view the log of the watch container to see if it has 
+triggered a failover.
+
+=== Testing 
+
+You can delete the *pgmaster* pod to cause a failover to occur.  After
+the failover, a new replica will be created by Openshift and the
+replica chosen as the master have its labels updated.
+
+Any applications using the master might see an error as the failover
+proceeds but normal querying should pick back up quickly.
