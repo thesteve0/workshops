@@ -5,18 +5,54 @@ master container and will trigger a failover onto a replica
 container if the master can not be reached.
 
 As part of the failover sequence, the replica chosen as the new
-master will have its Openshift labels updated to become the 
+master will have its labels updated to become the
 new master.
 
+
 === Starting the container
-The watch pod is  created as part of the tutorial startup script.
+There are two steps to getting things started. Because the watch container needs to do low level work it has a slightly different deployment flow:
+
+1. Create a service account
+2. Grant privileges to the account
+3. Bring in the template to create the Watch pod
+
+Let's go ahead and get it going:
+
+[source, bash]
+----
+> oc create -f ./watch-sa.json
+serviceaccount "pg-watcher" created
+
+# login as an admin
+> oc login
+Authentication required for https://10.2.2.2:8443 (openshift)
+Username: admin
+Password:
+Login successful.
+
+# adjust the policies
+> oc policy add-role-to-group edit system:serviceaccounts -n openshift
+> oc policy add-role-to-group edit system:serviceaccounts -n default
+
+# login as an user again
+> oc login
+Authentication required for https://10.2.2.2:8443 (openshift)
+Username: user
+Password:
+Login successful.
+
+> oc new-app .\watch.json -p CCP_IMAGE_TAG=centos7-9.5-1.2.2
+----
+
+
 
 === Accessing the Watch Container
 
-You can view the log of the watch container to see if it has 
+You can view the log of the watch container to see if it has
 triggered a failover.
 
-=== Testing 
+=== Testing
+Scale up the replicas to 3 pods to make this fun and exciting.
 
 You can delete the *pgmaster* pod to cause a failover to occur.  After
 the failover, a new replica will be created by Openshift and the

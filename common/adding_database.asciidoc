@@ -16,6 +16,40 @@ Now using project "spatialapp" on server "https://10.2.2.2:8443"...
 
 That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project.
 
+==== Preparing your GitHub repository
+
+The only reason we are working with the GitHub repository here and not in the code pieces is because we need to get the DDL files to our machine. If we weren't using these DDL files you could skip right to the "Generating Database Pieces" section.
+
+The source code for this project can be found here:
+
+https://github.com/thesteve0/v3simple-spatial
+
+Now *BEFORE* you go and _git clone_ it down to your machine, you need to fork it. See that button up towards the top right that says fork on it - [underline]#click it# (you did login with your github account right?)
+
+image::images/common/2_fork.png[]
+
+Now you should be looking at URL that replaces _thesteve0_ with your github userid:
+
+https://github.com/<your_userid>/v3simple-spatial
+
+This repository is set up for several different learning paths and so it has several different versions of app.py (the file that runs in a web app for Python). We need to rename the current app.py to 1_app.py. It's very easy to do from the web interface:
+
+1. click on the app.py file
+2. click on the pencil icon on the far right of the page
+3. change the name of the file to 1_app.py (a box right above the edit file box)
+4. Scroll down to the *Commit changes* area on the bottom of the page and enter a message
+5. Hit the Commit Changes button
+
+There, you just changed the name of the file in your repository.
+
+Now go back to the top level of your repository and follow the same process to rename _3_app.py_ to _app.py_.
+
+In the end your repository should look this:
+
+image::images/common/github_repo.png[]
+
+Go ahead and clone this repository to your machine.
+
 === Generating the Database Pieces
 
 In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _\examples\openshift\tutorial_ directory.

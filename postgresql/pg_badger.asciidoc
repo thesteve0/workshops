@@ -1,4 +1,4 @@
-== pgbadger 
+== pgbadger
 
 The pgbadger container provides a HTML/Javascript application
 which presents postgres log file data.  The crunchy-pgbadger
@@ -10,12 +10,12 @@ that can be invoked using curl or your browser.
 
 The tutorial startup script creates the components required
 for view a pgbadger report including:
- * crunchy-pgbadger container (added into the pgmaster pod) 
+ * crunchy-pgbadger container (added into the pgmaster pod)
 
 === Accessing the App
 
-You can access the pgbadger web application by browsing the following URL:
-....
-http://pgmaster-openshift.router.default.svc.cluster.local/api/badgergenerate
-....
+ oc new-app -f .\pgbadger-route.json
 
+You can access the pgbadger web application by browsing the following URL:
+
+http://pgmaster-testworkshop.apps.10.2.2.2.xip.io/
