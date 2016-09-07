@@ -2,12 +2,24 @@
 
 Now it's time to get to the part of the workshop you have all been waiting for - getting PostGIS up and running!
 
+==== Making a project
+
+Let's make a new project for this application:
+
+[source, bash]
+----
+
+> oc new-project spatialapp
+Now using project "spatialapp" on server "https://10.2.2.2:8443"...
+
+----
+
+That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project.
+
 === Generating the Database Pieces
 
 In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _\examples\openshift\tutorial_ directory.
 We are going to use a bunch of files in this directory but let's go ahead by creating our master instances:
-
-// TODO HERE!!!!
 
 [source, bash]
 ----

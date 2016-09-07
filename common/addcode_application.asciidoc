@@ -1,0 +1,126 @@
+== Beginning Your Application
+
+Let's go ahead and start our own project using Python. I chose Python for this workshop because I thought it would be easiest for you folks to understand regardless of your coding background. The development pattern you are going to use today will apply to any language you use for development in OpenShift.
+
+=== Adding Code and Doing a Build
+
+Go back to your fork of _v3simple-spatial_ repository on GitHub. In the middle of the page you will see a button that may say *SSH* on it. If it does, please change that to HTTPS and then click the clipboard to copy the URL in the box.
+
+image::images/common/2_ssh_to_https.png[]
+
+Our code is ready to use in a build on OpenShift. Let's fire off the build and deploy. In your terminal enter the following command:
+
+WARNING: Remember to change the GitHub URL below to point to your fork of the repository
+
+[source, bash]
+----
+> oc new-app python:3.5~https://github.com/thesteve0/v3simple-spatial.git --env PG_DATABASE=userdb,PG_USER=postgres,PG_PASSWORD=password
+--> Found image aa7b3ba (8 days old) in image stream "python" in project "openshift" under tag "3.5" for "python:3.5"
+
+    Python 3.5
+    ----------
+    Platform for building and running Python 3.5 applications
+
+    Tags: builder, python, python35, rh-python35
+
+    * A source build using source code from https://github.com/thesteve0/v3simple-spatial.git will be created
+      * The resulting image will be pushed to image stream "v3simple-spatial:latest"
+      * Use 'start-build' to trigger a new build
+    * This image will be deployed in deployment config "v3simple-spatial"
+    * Port 8080/tcp will be load balanced by service "v3simple-spatial"
+      * Other containers can access this service through the hostname "v3simple-spatial"
+
+--> Creating resources with label app=v3simple-spatial ...
+    imagestream "v3simple-spatial" created
+    buildconfig "v3simple-spatial" created
+    deploymentconfig "v3simple-spatial" created
+    service "v3simple-spatial" created
+--> Success
+    Build scheduled, use 'oc logs -f bc/v3simple-spatial' to track its progress.
+    Run 'oc status' to view your app.
+----
+
+
+What we just did is told OpenShift - take this https://github.com/openshift/s2i-python[Docker Image] that knows how to build a standard Python application layout and combine it with this source code and produce a new Docker Image. As part of this process the _new-app_ command knows we will need some other OpenShift objects to actually run that resulting image. The command goes ahead and makes those objects as well.
+
+=== Looking at what we built.
+
+At this point we are going to switch back to the web terminal since it is easier to look at web sites in a browser. Go ahead and go into your browser and go to the projects page. Once you are looking at all your projects go ahead and click on _spatialapp_.
+
+Your screen should look something like this:
+
+image::images/common/2_create_route.png[]
+
+You can see that we have the 1 pod running our image that was derived from our source code and our builder image. There is also other metadata in the box for the pod that we can return to later. For now I want you to click on the _Create Route_ button that is highlighted in red. This will create a URL where we can see the web page for our pod. By default, nothing is exposed to the outside world and you have to choose to expose it.
+
+Just click _Create_ on the next page that comes up - all the defaults are fine for our us. You could have also done this at the command line with
+
+[source, bash]
+----
+
+> oc expose service v3simple-spatial
+
+----
+
+Now when you come back to the Overview page there is a URL for the service ending in .xip.io, go ahead and click it! You will be greated by the following amazing web content:
+
+*hello OpenShift Ninja without DB*
+
+You have now all built and deployed containers with a working URL - give yourselves a pat on the back.
+
+== Looking at the Database Parts
+
+=== Reading From the Database
+
+To exercise the database some more we are going to change our python web application to read and write from the PostGIS master and slave services. When using OpenShift the way to handle the connection parameters to the DB are handled through environment variables. Rather than hard coding in IP addresses or username/passwords we set environment variables that actually point to those values.
+
+Some of these are set by the platform "automagically" - these are usually network type variables like hosts to IP and port mappings. The others, that we need to handle manually right now are database name, username, and password. At the end of this section I will explain how we could have avoided having to manually do this.
+
+So as I explained above we got the network pieces for free. We added env variables to the deployment configuration (dc) for the python code when used them in the _new-app_ command at the beginning. We add it to the dc so it becomes available to all pods controlled by the dc. We will start with the read operations from the DB so we will use the slave pods for those operations.
+
+In your browser go to the Browse -> Deployments
+
+image::images/common/4_deployments.png[]
+
+From there click on the deployment for the _pg-slave-rc_ then click on the environment tab. From there you should see all the environment variables defined on the dc. We are interested in 3 of the variables: PG_USER, PG_PASSWORD, and PG_DATABASE. This is where we got the information to put in the _new-app_ command.
+
+image::images/common/4_dc_env_variables.png[]
+
+We also added some Python packages to our requirements.txt so they could get pulled in at build time.
+* Added the library to requirements.txt
+[source, bash]
+----
+psycopg2==2.6.1
+
+----
+
+WARNING: This code is in NO WAY production type code. This code is trying to be as simple as possible so you learn the basic patterns. In a real app you would not load a DB connection on every request, you would check for exceptions, and you would have more optimized queries.
+
+
+=== Writing to Master
+
+The great part of what we have set up is we can isolate our writes to master and our reads from the replica - which is why people usually set up replicas in the first place. We have already set all the environment variables we needed but in a more production ready app you would probably use two different Postgresql accounts, one for reading and one for writing, which would require new environment variables.
+
+I added code to randomly generate a name and the coords for a new point whenever you HTTP POST to the /db URL. Again this is really hacky code for a workshop - not production code. I will talk you through the code in class.
+
+Finally, to hit this URL you can either install a plugin for your browser or you can use cURL. By default browsers do an HTTP GET but we need a POST. There are plenty of plugins for Chrome and Firefox to help you do a HTTP Post - most of them have the word REST in them. Here is cURL syntax that will exercise the end point:
+
+[source, bash]
+----
+
+# -d says to do a POST and we leave the payload blank
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''
+
+# if you want to look at the output in a nicer format you can save it to HTML
+curl 'http://v3simple-spatial-spatialapp.apps.10.2.2.2.xip.io/db' -d ''  > index.html
+
+
+----
+
+If you use a browser plugin the URL stays the same and you just tell the plugin to use a POST.
+
+The response will be the last 10 entries in the DB - which will include your latest entry. You can go ahead and POST several items and watch the new entries show up.
+
+That's all we are going to do with the code for now. The rest of the workshop will be focusing on the advanced features you can get when you combine container, Kubernetes, OpenShift, and smart engineering.
+
+<<<

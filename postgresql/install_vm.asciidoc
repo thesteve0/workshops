@@ -30,8 +30,6 @@ These repos may not be finished or even available until right before the class, 
 
 Put these in a directory titled _os_workshop_ (not required but then it is on you to translate to your directory name in the rest of the instructions)
 
-*FORK* The sample code https://github.com/thesteve0/v3simple-spatial and then clone to your machine. If you just clone without the fork you will not be able to do any of the code change exercises.
-
 Clone the Crunchy DB code https://github.com/CrunchyData/crunchy-containers (optionally you can fork and then clone if you think you are going to want to make your own changes).
 
 === Getting the Vagrant box on your local machine

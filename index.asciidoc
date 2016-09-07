@@ -10,9 +10,9 @@ free use as long you provide attribution.
 //WARNING REWRITE THE MASTER CONTENT BEFORE TAKING THIS ON
 //https://github.com/CrunchyData/crunchy-containers/tree/master/examples/openshift/tutorial
 
-//REWRITE THIS
+
 include::postgresql/workshop_intro.asciidoc[]
-//REWRITE THIS
+
 include::postgresql/install_vm.asciidoc[]
 
 include::common/intro_to_os.asciidoc[]
@@ -25,11 +25,7 @@ include::common/templates.asciidoc[]
 
 include::common/adding_database.asciidoc[]
 
-//todo REWRITE TO JUST BE ADDING ALL THE CODE - SO COMBINE THE TWO CHAPTERS
-include::common/adding_code.asciidoc[]
-
-//todo REWRITE GIVEN NEW ORDER
-include::common/full_application.asciidoc[]
+include::common/addcode_application.asciidoc[]
 
 //todo write this
 include::postgresql/pg_admin.asciidoc[]

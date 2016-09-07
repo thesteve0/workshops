@@ -11,7 +11,7 @@ In your browser go to the Browse -> Deployments
 
 image::images/common/4_deployments.png[]
 
-From there click on the deployment for the _pg-slave-rc_ then click on the environment tab. From there you should see all the environment variables defined on the dc. We are interested in 3 of the variables: PG_USER, PG_PASSWORD, and PG_DATABASE. You will need the names and values for both of these (please note that your values will be different). They are highlighted in red below:
+From there click on the deployment for the _REPLICA_DC_EXAMPLE_, called _replica_dc_ then click on the environment tab. From there you should see all the environment variables defined on the dc. We are interested in 3 of the variables: PG_USER, PG_ROOT_PASSWORD, and PG_DATABASE. You will need the names and values for both of these (please note that your values will be different). They are highlighted in red below:
 
 image::images/common/4_dc_env_variables.png[]
 
@@ -20,7 +20,7 @@ Now that we have these we just have to do a simple command:
 [source, bash]
 ----
 
-> oc set env dc/simple-spatial PG_DATABASE=userdb PG_USER=postgres  PG_ROOT_PASSWORD=password
+> oc set env dc/simple-spatial PG_DATABASE=userdb PG_USER=postgres  PG_PASSWORD=password
 deploymentconfig "v3simple-spatial" updated
 
 ----
