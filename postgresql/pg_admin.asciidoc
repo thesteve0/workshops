@@ -1,10 +1,11 @@
-== pgadmin4
+== Using pgadmin4 - A Web Based Admin Console
 
-The pgadmin4 web application allows you to view a database
-and execute queries in a web user interface.
+Many of you have probably used the older PGAdmin 3, which provided a desktop interface to your PostgreSQL database. We could still do that here by using _oc port-forward_ and port forwarding from the pg container in the master pod. But instead we are going to enable a  pgadmin4 web application allows to view a database and execute queries in a web user interface. Again we have a template ot make this simple and easy for you to set up through containers and templates.
 
 
-=== Starting the container
+=== Provisioning the container
+
+To put the container into your application is as simple as (again in the tutorial directory):
 
 [source, bash]
 ----
@@ -12,12 +13,12 @@ and execute queries in a web user interface.
 > oc new-app .\pgadmin4.json -p CCP_IMAGE_TAG=centos7-9.5-1.2.2
 ----
 
-=== Accessing the App
+After this run you should not see a new service with a URL for pgadmin4
 
-You can access pgadmin4 by browsing the following URL:
-....
-http://pgadmin4-testworkshop.apps.10.2.2.2.xip.io/
-....
+mage::images/postgresql/pg_admin_overview.png[]
+
+
+Go ahead and click the URL and you will be presented with the login screen
 
 The default admininstrative user ID is *admin@admin.org*.  The
 password is *password*.
@@ -41,3 +42,7 @@ Next, click on the Tools menu item and select the Query Tool button to
 expose the SQL query tool screen.  From here, you can enter
 SQL commands and execute them on the server.  The button with the lighting
 bolt on it will execute the SQL command.
+
+Have fun and play around for a little bit.
+
+<<<

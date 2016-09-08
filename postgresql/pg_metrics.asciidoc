@@ -1,22 +1,15 @@
 == Postgresql Metrics
 
-The postgres metrics are collected by the crunchy-collect container.
-The collect container is added into the master database pod.  The
-collect container collects 30+ metrics and sends them to
-the Prometheus time series data store.
+Sometimes when you are running your database you want to collect and visualize metrics on the instance. Now we are going to set up infrastructure to collect and visualize the data. We already added a container to the master pod called pgcollect. The pgcollect container collects 30+ metrics and sends them to the Prometheus time series data store. From there we hook up the grafana visualization tools so we can look at the metrics.
 
-Metrics can be queried within the Grafana web application.
+=== The Components and Installing Them
 
-=== Components
-
-The tutorial startup script creates the components required
-for metrics collection and viewing including:
+We are about to add the following pieces to our application::
  * prometheus (pod and service)
  * prometheus push gateway (pod and service)
  * grafana (pod, service, and route)
- * crunchy-collect container (added into the pgmaster pod)
 
-=== Accessing the App
+Again, there is a template to add all the pieces we need:
 
 [source, bash]
 ----
@@ -53,3 +46,5 @@ of the screen, select Add Panel->Graph to add a graph.  On the graph,
 select the *crunchy* data source, then click on the Metric Lookup
 field to see the available metrics being collected.  Select a metric
 and it should display on the graph.
+
+<<<

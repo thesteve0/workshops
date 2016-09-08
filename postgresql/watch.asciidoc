@@ -60,3 +60,5 @@ replica chosen as the master have its labels updated.
 
 Any applications using the master might see an error as the failover
 proceeds but normal querying should pick back up quickly.
+
+<<<
