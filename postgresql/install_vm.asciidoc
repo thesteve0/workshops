@@ -12,10 +12,10 @@ Let's go ahead and install the Vagrant box file and get everything up and runnin
 
 WARNING: You must do this *BEFORE* the class - we will not have time to do this in class.
 
-1. Install https://www.virtualbox.org/wiki/Download_Old_Builds_5_0[VirtualBox] - I have pointed you are the past release because Vagrant doesn't work with 5.1 yet.
+1. Install https://www.virtualbox.org/wiki/Download_Old_Builds_5_0[VirtualBox] - I have pointed you to the past release because Vagrant doesn't work with 5.1 yet.
 2. Install https://releases.hashicorp.com/vagrant/1.8.4/[Vagrant] - I have pointed you at 1.8.4 because the current version has a nasty SSH bug.
 
-VirtualBox is a requirement. I know some of you have parallels and vmware and other virtualization tech but I only built the image for VirtualBox. My reasoning for doing this is that it is the only FOSS VM software out there. Sorry but that's the breaks.
+VirtualBox is a requirement. I know some of you have parallels and vmware and other virtualization tech but I only built the image for VirtualBox. My reasoning for doing this is that it is the only cross-platform FOSS VM software out there. Sorry but that's the breaks.
 
 === Account requirements
 
@@ -41,6 +41,7 @@ In the _os_workshop_ directory make a directory titled _vagrant_ and change into
 
 If you are doing this at home (which I hope you did before the class) do the following commands
 
+WARNING: You must do this *BEFORE* the class - we will not have time to do this in class.
 
 [source, bash]
 ----
@@ -49,7 +50,7 @@ C:\_os_workshop\vagrant> vagrant up --provider=virtualbox
 
 ----
 
-There is a 5.5 Gig file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up.
+There is a *5.5 Gig* file that needs to be downloaded so it may take a while. After that is download Vagrant will bring everything up.
 
 ---
 
