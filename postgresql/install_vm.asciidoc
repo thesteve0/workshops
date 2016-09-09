@@ -5,7 +5,7 @@ Let's go ahead and install the Vagrant box file and get everything up and runnin
 
 === Hardware Requirements
 1. 10 gigs of disk to start but may need up to 30
-2. At least 8 gigs of RAM by default. Our VM will use 4 by default so we want to leave 4 gigs for the OS and others
+2. At least 8 gigs of RAM by default. Our VM will use 6 by default so we want to leave 2 gigs for the OS and others
 
 
 === Software Requirements
@@ -120,5 +120,32 @@ C:\_os_workshop\vagrant>vagrant up --provider=virtualbox
 ----
 
 You don't even need to be online for this command to work! Welcome to the future.
+
+=== Troubleshooting
+
+1. To reduce amount of memory. Edit Vagrantfile:
+
+[source, ruby]
+----
+ config.vm.provider "virtualbox" do |vb|
+    vb.memory = "4096"
+  end
+----
+
+2. If you have ssh authentication issues while starting the machine. Just skip ahead. You don’t need to log into the machine.
+
+3. http/ssl problems when doing login try these (in order of what to start with):
+    * oc login  --insecure-skip-tls-verify=true
+    * Reboot the machine
+
+4. If you have issues with builds not resolving hosts (like when building v3simplespatial):
+  * Check /etc/resolv.conf in the VM (vagrant ssh and cat /etc/resolv.conf)
+  * If the nameserver you have is in 10.x.x.x, change it to 8.8.8.8
+  * Restart origin from within the VM (sudo systemctl restart origin)
+
+5. If must run VirtualBox 5.1 then there are instructions here on how to workaround
+  * https://github.com/mitchellh/vagrant/issues/7588
+
+
 
 <<<
