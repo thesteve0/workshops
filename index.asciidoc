@@ -29,15 +29,15 @@ include::common/addcode_application.asciidoc[]
 
 include::postgresql/pg_admin.asciidoc[]
 
-//todo write this
 include::postgresql/pg_metrics.asciidoc[]
 
-//todo write this
 include::postgresql/pg_badger.asciidoc[]
+
+include::postgresql/watch.asciidoc[]
 
 //todo maybe write this - talk about other Crunchy Stuff Jeff has written but we
 //didn't show
-include::postgresql/other_functionality.asciidoc[]
+//include::postgresql/other_functionality.asciidoc[]
 
 <<<
 

@@ -124,27 +124,23 @@ You don't even need to be online for this command to work! Welcome to the future
 
 === Troubleshooting
 
-1. To reduce amount of memory. Edit Vagrantfile:
-
+. To reduce amount of memory. Edit Vagrantfile:
 [source, ruby]
 ----
  config.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
   end
 ----
-
-2. If you have ssh authentication issues while starting the machine. Just skip ahead. You don’t need to log into the machine.
-
-3. http/ssl problems when doing login try these (in order of what to start with):
+[start=2]
+. If you have ssh authentication issues while starting the machine. Just skip ahead. You don’t need to log into the machine.
+. http/ssl problems when doing login try these (in order of what to start with):
     * oc login  --insecure-skip-tls-verify=true
     * Reboot the machine
-
-4. If you have issues with builds not resolving hosts (like when building v3simplespatial):
+. If you have issues with builds not resolving hosts (like when building v3simplespatial):
   * Check /etc/resolv.conf in the VM (vagrant ssh and cat /etc/resolv.conf)
   * If the nameserver you have is in 10.x.x.x, change it to 8.8.8.8
   * Restart origin from within the VM (sudo systemctl restart origin)
-
-5. If must run VirtualBox 5.1 then there are instructions here on how to workaround
+. If must run VirtualBox 5.1 then there are instructions here on how to workaround
   * https://github.com/mitchellh/vagrant/issues/7588
 
 

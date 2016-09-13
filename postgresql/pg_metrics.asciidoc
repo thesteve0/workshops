@@ -20,27 +20,61 @@ Again, there is a template to add all the pieces we need:
 
 You can access grafana web application by browsing the following URL:
 
-http://grafana-spatialapp.apps.10.2.2.2.xip.io/....
+http://grafana-spatialapp.apps.10.2.2.2.xip.io/
+
 
 Which is also available as a route to click on.
 
 
-The default admininstrative user ID is *admin*.  The
-password is *admin*.
+The default admininstrative user ID is *admin*.  The password is *admin*.
 
-=== Creating a Datasource ??????????????
+=== Creating a Datasource
 
 In the upper left-side of the application, click on the dropdown
 and select the Data Sources button to add a new data source.
 
 Click on the Add Data Source button on the next screen.
 
+image::images/postgresql/grafana1.png[]
+
+
 Select *Prometheus* for the data source Type, enter a name of *crunchy*
 for the Name field, enter http://prometheus-spatialapp.apps.10.2.2.2.xip.io for the URL field
 and click the Add button. Click the "test connection" button and you should get a green box to show up saying success. Then you can click save. If not then please call one of us over to help troubleshoot.
 
+image::images/postgresql/grafana2.png[]
+
 In the upper left-side of the application, click on the dropdown and select the Dashboard->New button to add a new dashboard.
 
-On the next screen, click on the small green tab button in the upper left of the screen, select Add Panel->Graph to add a graph.  On the graph, select the *crunchy* data source on the bottom right of the screen, then click on the Metric Lookup field to see the available metrics being collected.  Select a metric and it should display on the graph.
+image::images/postgresql/grafana3.png[]
+
+On the next screen, click on the small green tab button in the upper left of the screen, select Add Panel->Graph to add a graph.
+
+image::images/postgresql/grafana4.png[]
+
+On the graph, select the *crunchy* data source on the bottom right of the screen.
+
+image::images/postgresql/grafana5.png[]
+
+
+Finally click on the Metric Lookup field to see the available metrics being collected.  Select a metric and it should display on the graph.
+
+image::images/postgresql/grafana6.png[]
+
+Don't expect to see any data right away. You need to go exercise the database to get metrics to show up. You can do this by doing a bunch of work using our web application. You could also load up the DDL file a couple of times.
+
+The master container has pgbench in the image so we can use that as well.
+
+[source, bash]
+----
+
+# instead of this command you can use the terminal in web console for the master pod
+oc exec -it master bash -c pg
+
+export PGHOST=/tmp;psql -c 'create database pgbench'
+	/usr/pgsql-9.5/bin/pgbench --host=master --username=postgres --scale=5 --initialize pgbench
+	/usr/pgsql-9.5/bin/pgbench --host=master --username=postgres --time=10 --client=15 pgbench
+
+----
 
 <<<

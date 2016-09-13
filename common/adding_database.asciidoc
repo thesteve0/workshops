@@ -2,7 +2,7 @@
 
 Now it's time to get to the part of the workshop you have all been waiting for - getting PostGIS up and running!
 
-==== Making a project
+=== Making a project
 
 Let's make a new project for this application:
 
@@ -16,7 +16,7 @@ Now using project "spatialapp" on server "https://10.2.2.2:8443"...
 
 That's it - you now a project "spatialapp" and all the subsequent commands will affect this project until you swith to another project.
 
-==== Preparing your GitHub repository
+=== Preparing your GitHub repository
 
 The only reason we are working with the GitHub repository here and not in the code pieces is because we need to get the DDL files to our machine. If we weren't using these DDL files you could skip right to the "Generating Database Pieces" section.
 

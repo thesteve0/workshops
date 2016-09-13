@@ -63,25 +63,23 @@ One of the really useful byproducts of having a declarative API mean import and 
 
 First we need to export the JSON (my preferred format) for our existing application. This is quite simple:
 
-1. Export our current application as a template text file:
-
+. Export our current application as a template text file:
 [source, console]
 ----
 oc export is,dc,svc,bc,route --as-template=json -o json > simple_spatial.json
 ----
-
 We have now created a template that lists all of our project resources, except pods, as a template. We do not export the pods because we actually want our project to recreate the new pods.
-
 If we wanted to move the pods over exactly then we would have to put the containers we created into a registry our new project will have access to and then name the containers by name.
 
-2. Create a new project to import our project into
+[start=2]
+. Create a new project to import our project into
 [source, console]
 ----
 oc new-project newproject
 ----
 
-3. Open simple_spatial.json in your favorite text editor. After you do that do a global search and replace of "spatialapp" with "newproject". And remove the Sha signature from the item that looks like:
-
+[start=3]
+. Open simple_spatial.json in your favorite text editor. After you do that do a global search and replace of "spatialapp" with "newproject". And remove the Sha signature from the item that looks like:
 [source, console]
 ----
 BEFORE
@@ -93,8 +91,8 @@ AFTER
 
 ----
 
-4. Make sure you are in the newproject project and then just do the new-app command on simple-spatial.json
-
+[start=4]
+. Make sure you are in the newproject project and then just do the new-app command on simple-spatial.json
 [source, console]
 ----
 
@@ -102,7 +100,8 @@ oc new-app simple_spatial.json
 
 ----
 
-5. PROFIT!!!
+[start=5]
+. PROFIT!!!
 
 You can use these steps to move between any OpenShift instances as well - as long as they can see the same git repos and Docker registries.
 

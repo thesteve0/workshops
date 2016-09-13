@@ -48,9 +48,7 @@ You can delete the *pgmaster* pod to cause a failover to occur.
 [source, bash]
 ----
 
-> oc get pods
-
-> oc delete pod ?????????????????
+> oc delete pod master
 
 ----
 
