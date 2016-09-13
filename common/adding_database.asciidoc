@@ -91,8 +91,8 @@ Let's shell into that same pod and load the data (you can also do this from the 
 [source, bash]
 ----
 
-> oc rsh -c pg gmaster
-sh-4.2$ psql -l
+> oc rsh -c pg master
+sh-4.2$ psql -l -h 127.0.0.1
                              List of databases
    Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges
 -----------+----------+-----------+---------+-------+-----------------------

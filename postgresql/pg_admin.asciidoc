@@ -15,7 +15,7 @@ To put the container into your application is as simple as (again in the worksho
 
 After this run you should not see a new service with a URL for pgadmin4
 
-mage::images/postgresql/pg_admin_overview.png[]
+image::images/postgresql/pg_admin_overview.png[]
 
 
 Go ahead and click the URL and you will be presented with the login screen
@@ -29,8 +29,7 @@ In the left-side tree, right-click then select the
 Create->Server button from the menu.
 
 Enter a name for the database server you wish to connect to such
-as *pgmaster*.  On the Connection tab, enter the service name *pgmaster* within
-the Host Name/Address text field, and enter *postgres* in the User
+as *pgmaster*.  On the Connection tab, enter the service name *master* within the Host Name/Address text field, and enter *postgres* in the User
 Name field, and *password* in the Password field, then select the
 Save button.
 
