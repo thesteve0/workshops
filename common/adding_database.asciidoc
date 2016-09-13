@@ -52,7 +52,7 @@ Go ahead and clone this repository to your machine.
 
 === Generating the Database Pieces
 
-In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _\examples\openshift\tutorial_ directory.
+In the terminal, please go to the location on your machine where you cloned the Crunchy Solutions repository. Go to the _\examples\openshift\workshop_ directory.
 We are going to use a bunch of files in this directory but let's go ahead by creating our master instances:
 
 [source, bash]

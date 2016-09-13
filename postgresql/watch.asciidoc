@@ -1,16 +1,11 @@
 == crunchy-watch
 
-The crunchy-watch container does a health check on a Postgres
-master container and will trigger a failover onto a replica
-container if the master can not be reached.
+The crunchy-watch container does a health check on a PostgreSQL master container and will trigger a failover onto a replica container if the master can not be reached. As part of the failover sequence, the replica chosen as the new master will have its labels updated to become the new master.
 
-As part of the failover sequence, the replica chosen as the new
-master will have its labels updated to become the
-new master.
-
+Because images are immutable, we can not restart the master pod because it will not have any of the data or accounts created since it started running. To prevent the master from just restarting we created a pod with no DeploymentConfig so there is nothing to insure that a new pod will be spun back up. Instead we had to write an external pod that could watch the status of the master and then use the Kubernetes API to properly promote one of the replicas to the new master.  As we have seen before, labels in addition to the pod itself help Kubernetes, which is also why we need to update all the labels to make the transition complete.
 
 === Starting the container
-There are two steps to getting things started. Because the watch container needs to do low level work it has a slightly different deployment flow:
+There are two steps to getting things started. Because the watch container needs to call the Kubernetes API we have a different deployment flow:
 
 1. Create a service account
 2. Grant privileges to the account
@@ -31,9 +26,7 @@ Password:
 Login successful.
 
 # adjust the policies
-> oc policy add-role-to-group edit system:serviceaccounts -n openshift
-> oc policy add-role-to-group edit system:serviceaccounts -n default
-
+oc policy add-role-to-group edit system:serviceaccounts -n spatialapp
 # login as an user again
 > oc login
 Authentication required for https://10.2.2.2:8443 (openshift)
@@ -44,21 +37,43 @@ Login successful.
 > oc new-app .\watch.json -p CCP_IMAGE_TAG=centos7-9.5-1.2.2
 ----
 
-
-
 === Accessing the Watch Container
-
-You can view the log of the watch container to see if it has
-triggered a failover.
+To keep tabs on the watch container go ahead and bring up the pod in the web console and then click on the log tab. You can see the log output showing the watch utility checking to make sure there is a pod with the label master.
 
 === Testing
-Scale up the replicas to 3 pods to make this fun and exciting.
+Scale up the PostgreSQL replicas to 3 pods to make this fun and exciting.
 
-You can delete the *pgmaster* pod to cause a failover to occur.  After
-the failover, a new replica will be created by Openshift and the
-replica chosen as the master have its labels updated.
+You can delete the *pgmaster* pod to cause a failover to occur.
 
-Any applications using the master might see an error as the failover
-proceeds but normal querying should pick back up quickly.
+[source, bash]
+----
+
+> oc get pods
+
+> oc delete pod ?????????????????
+
+----
+
+After the failover, a new replica will be created by Openshift and the replica chosen as the master have its labels updated.
+
+Any applications using the master might see an error as the failover proceeds but normal querying should pick back up quickly.
+
+=== Wrap up
+
+And with that we have finished exploring all the functionality for today. We hope you have seen how easy it can be to enable advanced functionality for Postgresql. Between containers for immutable binaries with configuration, Kubernetes for orchestration, and OpenShift for user experience both for admins and developers.
+
+Please feel free to keep using this VM to explore the technology. If you want the latest VM, without all the Docker images cached, you can always install the standard Vagrant image using the following commands
+
+[source, bash]
+----
+
+vagrant init openshift/origin-all-in-one
+vagrant up
+
+----
+
+We usually release a new version within a week of a new release https://github.com/openshift/origin/releases[OpenShift Origin]
+
+Thanks for participating today and please send feedback (for the class and anything else for the VM) to thesteve0@redhat.com
 
 <<<

@@ -19,14 +19,16 @@ Again, there is a template to add all the pieces we need:
 ----
 
 You can access grafana web application by browsing the following URL:
-....
-http://grafana-openshift.router.default.sv.cluster.local/login
-....
+
+http://grafana-spatialapp.apps.10.2.2.2.xip.io/....
+
+Which is also available as a route to click on.
+
 
 The default admininstrative user ID is *admin*.  The
 password is *admin*.
 
-=== Creating a Datasource
+=== Creating a Datasource ??????????????
 
 In the upper left-side of the application, click on the dropdown
 and select the Data Sources button to add a new data source.
@@ -34,17 +36,11 @@ and select the Data Sources button to add a new data source.
 Click on the Add Data Source button on the next screen.
 
 Select *Prometheus* for the data source Type, enter a name of *crunchy*
-for the Name field, enter http://prometheus-testworkshop.apps.10.2.2.2.xip.io/ for the URL field
-and click the Add button.  You should get a green success message
-if all is well at this point.
+for the Name field, enter http://prometheus-spatialapp.apps.10.2.2.2.xip.io for the URL field
+and click the Add button. Click the "test connection" button and you should get a green box to show up saying success. Then you can click save. If not then please call one of us over to help troubleshoot.
 
-In the upper left-side of the application, click on the dropdown
-and select the Dashboard->New button to add a new dashboard.
+In the upper left-side of the application, click on the dropdown and select the Dashboard->New button to add a new dashboard.
 
-On the next screen, click on the small green tab button in the upper left
-of the screen, select Add Panel->Graph to add a graph.  On the graph,
-select the *crunchy* data source, then click on the Metric Lookup
-field to see the available metrics being collected.  Select a metric
-and it should display on the graph.
+On the next screen, click on the small green tab button in the upper left of the screen, select Add Panel->Graph to add a graph.  On the graph, select the *crunchy* data source on the bottom right of the screen, then click on the Metric Lookup field to see the available metrics being collected.  Select a metric and it should display on the graph.
 
 <<<

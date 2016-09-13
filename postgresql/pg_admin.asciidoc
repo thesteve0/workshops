@@ -5,7 +5,7 @@ Many of you have probably used the older PGAdmin 3, which provided a desktop int
 
 === Provisioning the container
 
-To put the container into your application is as simple as (again in the tutorial directory):
+To put the container into your application is as simple as (again in the workshop directory):
 
 [source, bash]
 ----

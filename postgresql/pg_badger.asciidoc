@@ -1,25 +1,26 @@
 == pgbadger
 
-The pgbadger container provides a HTML/Javascript application
-which presents postgres log file data.  The crunchy-pgbadger
-container wraps the pgbadger utility in a small HTTP service
-that can be invoked using curl or your browser.
+The pgbadger container provides a HTML/Javascript application which presents PostgreSQL log file data.  The crunchy-pgbadger container wraps the pgbadger utility in a small HTTP service that can be invoked using curl or your browser. As opposed to Grafana and Prometheus, which provide statistics that update as the metrics are collected, PGBadger goes through the log files and provides statistics on how things have been running.
 
 
 === Components
 
-The tutorial startup script creates the components required
-for view a pgbadger report including:
- * crunchy-pgbadger container (added into the pgmaster pod)
+The pod to run pgbadger and the lightweight web server was already spun up when we processed master.json.  So there is nothing to "spin up" but we do need to make a route to the web server.
+We have already created a JSON template to make the route. If you look at the JSON you will also see we refer to the port by name. This is possible because we actually name the service port when we made the master.json file. This can be useful if you want to allow arbitrary ports to be assigned at runtime without affecting the ability to bind to them.
 
-=== Accessing the App
+[source, bash]
+----
 
  oc new-app -f .\pgbadger-route.json
 
+----
+
 You can access the pgbadger web application by browsing the following URL:
 
-http://pgmaster-testworkshop.apps.10.2.2.2.xip.io/
+http://pgmaster-testworkshop.apps.10.2.2.2.xip.io/api/badgergenerate
 
+or just click on on the link in the OpenShift web console.
 
+It's that simple!
 
 <<<

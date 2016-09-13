@@ -8,7 +8,7 @@ under Creative http://creativecommons.org/licenses/by/4.0/[Commons License] allo
 free use as long you provide attribution.
 
 //WARNING REWRITE THE MASTER CONTENT BEFORE TAKING THIS ON
-//https://github.com/CrunchyData/crunchy-containers/tree/master/examples/openshift/tutorial
+//https://github.com/CrunchyData/crunchy-containers/tree/master/examples/openshift/workshop
 
 
 include::postgresql/workshop_intro.asciidoc[]
@@ -27,7 +27,6 @@ include::common/adding_database.asciidoc[]
 
 include::common/addcode_application.asciidoc[]
 
-//todo write this
 include::postgresql/pg_admin.asciidoc[]
 
 //todo write this
