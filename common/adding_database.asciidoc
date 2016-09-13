@@ -74,13 +74,13 @@ Let's go ahead and load up the database in the master with some DDL. In the v3si
 # we need to get the master pod - it will have a different name on your machine
 > oc get pods
 NAME                 READY     STATUS    RESTARTS   AGE
-pgmaster             3/3       Running   0          13m
+master             3/3       Running   0          13m
 replica-dc-1-m46ri   1/1       Running   0          4m
 
 #Look for the container named pg - we will need this below
 > oc describe pods pgmaster
 
- oc rsync ./ddl pgmaster:/tmp/. -c pg
+ > oc rsync ./ddl master:/tmp/. -c pg
 
 ----
 
@@ -91,7 +91,7 @@ Let's shell into that same pod and load the data (you can also do this from the 
 [source, bash]
 ----
 
-> oc rsh -c pg pgmaster
+> oc rsh -c pg gmaster
 sh-4.2$ psql -l
                              List of databases
    Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges
