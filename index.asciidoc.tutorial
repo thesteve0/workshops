@@ -22,10 +22,8 @@ include::common/templates.asciidoc[]
 
 include::common/adding_database.asciidoc[]
 
-//todo REWRITE TO JUST BE ADDING ALL THE CODE - SO COMBINE THE TWO CHAPTERS
 include::common/adding_code.asciidoc[]
 
-//todo REWRITE GIVEN NEW ORDER
 include::common/full_application.asciidoc[]
 
 

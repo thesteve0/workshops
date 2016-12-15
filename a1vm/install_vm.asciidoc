@@ -26,7 +26,9 @@ With that said, let's go ahead and install the Vagrant box file and get everythi
 WARNING: You must do this *BEFORE* the install.
 
 1. Install https://www.virtualbox.org/wiki/Download_Old_Builds_5_0[VirtualBox]. Vagrant doesn't work with the 5.1 versions
-2. Install https://releases.hashicorp.com/vagrant/1.8.4/[Vagrant]. There is a nasty SSH bug in the latest so we need to go back one
+2. Install https://releases.hashicorp.com/vagrant/1.8.4/[Vagrant 1.8.4]. There is a nasty SSH bug in the 1.8.5 and various other issues. 
+
+You can try other combinations of this software if you want to try but we only certify Vagrant 1.8.4 and VirtualBox 5.0.latest. If all else fails go with this combination.
 
 VirtualBox is a requirement. We know some of you have parallels and vmware and other virtualization tech but we only built the image for VirtualBox.
 Our reasoning for doing this is that it is the only FOSS VM software out there. Sorry but that's the breaks.
@@ -64,6 +66,8 @@ They will always be on the Origin latest release page
 
 https://github.com/openshift/origin/releases
 
+We are using 1.3.0 release of OpenShift Origin. 
+
 ---
 ==== Final step
 
@@ -90,11 +94,10 @@ When "vagrant up" is done you should see a message that ends with:
 ==> default: $ oc login https://10.2.2.2:8443
 ----
 
- If you see this then you have installed everything properly.
+If you see this then you have installed everything properly.
 
-I know some of you are going to be curious and are going to start playing with this VM. That's OK!
 
-Right before class (or if you break it) you just need to do the following steps:
+If you break the installation you just need to do the following steps:
 
 [source, bash]
 ----
